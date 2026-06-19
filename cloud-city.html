@@ -126,6 +126,44 @@
   .sheet button.action:active{transform:scale(.96)}
   .sheet button.action:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
 
+  /* ===== AWS console board (configuration hands-on) ===== */
+  #bConsole{display:none}
+  #bConsole.show{display:block}
+  .awsboard{margin:6px 0 4px;border:1px solid rgba(255,153,0,.4);border-radius:12px;background:linear-gradient(180deg,#0f1729,#0a0f1d);overflow:hidden}
+  .awsboard-head{background:#16202f;border-bottom:1px solid rgba(255,255,255,.08);padding:10px 14px;display:flex;align-items:center;gap:10px}
+  .awsboard-head .awsdot{width:10px;height:10px;border-radius:2px;background:var(--orange)}
+  .awsboard-head .svc{font-weight:800;letter-spacing:.3px;color:#fff;font-size:15px}
+  .awsboard-head .region{margin-left:auto;font-family:ui-monospace,Consolas,monospace;font-size:10.5px;color:#8aa0c0;border:1px solid rgba(255,255,255,.12);padding:2px 7px;border-radius:5px}
+  .awsboard-body{padding:14px 16px}
+  .awsboard-scenario{font-size:13.5px;line-height:1.55;color:#dbe7f5;background:rgba(122,217,255,.07);border-left:3px solid #7ad9ff;padding:9px 12px;border-radius:0 8px 8px 0;margin-bottom:10px}
+  .awsboard-scenario b{color:#7ad9ff}
+  .awsboard-hint{font-family:ui-monospace,Consolas,monospace;font-size:11.5px;color:#b48bff;margin:0 2px 14px}
+  .awsboard-hint::before{content:"↳ PILOT: ";color:#caa6ff}
+  .awsfield{display:block;margin-bottom:13px}
+  .awsfield-label{display:block;font-size:12px;font-weight:600;color:#cfe0f5;margin-bottom:5px}
+  .awsfield-label .req{color:var(--orange);margin-left:3px}
+  .awsfield select{width:100%;appearance:none;-webkit-appearance:none;font-family:inherit;font-size:13.5px;color:#fff;
+    background:#0a1322 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12'><path d='M2 4l4 4 4-4' fill='none' stroke='%23ff9900' stroke-width='1.6'/></svg>") no-repeat right 12px center;
+    border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:11px 34px 11px 12px;cursor:pointer}
+  .awsfield select:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 2px rgba(255,153,0,.25)}
+  .awsfield.ok select{border-color:var(--good);box-shadow:0 0 0 2px rgba(92,219,149,.25)}
+  .awsfield.bad select{border-color:var(--bad);box-shadow:0 0 0 2px rgba(255,107,107,.22)}
+  .awsfield-explain{display:none;font-size:11.5px;line-height:1.5;margin-top:6px;padding:7px 10px;border-radius:7px}
+  .awsfield.ok .awsfield-explain{display:block;background:rgba(92,219,149,.1);color:#bff0d0;border-left:3px solid var(--good)}
+  .awsfield.bad .awsfield-explain{display:block;background:rgba(255,107,107,.1);color:#ffc9c9;border-left:3px solid var(--bad)}
+  .awsboard-actions{display:flex;align-items:center;gap:12px;margin-top:6px;flex-wrap:wrap}
+  .awsboard-submit{padding:12px 20px;border:none;border-radius:9px;background:linear-gradient(180deg,var(--orange),var(--orange-deep));color:var(--ink);font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 4px 16px rgba(255,153,0,.35)}
+  .awsboard-submit:hover{filter:brightness(1.07)} .awsboard-submit:active{transform:translateY(1px)}
+  .awsboard-submit:focus-visible{outline:2px solid #fff;outline-offset:2px}
+  .awsboard-reset{padding:11px 14px;border:1px solid rgba(255,255,255,.2);border-radius:9px;background:transparent;color:#cfe0f5;font-family:inherit;font-size:12.5px;cursor:pointer}
+  .awsboard-reset:hover{border-color:#fff}
+  .awsboard-progress{font-family:ui-monospace,Consolas,monospace;font-size:12px;color:#8aa0c0}
+  .awsboard-result{margin-top:12px;font-size:13.5px;line-height:1.55;padding:11px 13px;border-radius:9px;display:none}
+  .awsboard-result.show{display:block}
+  .awsboard-result.win{background:rgba(92,219,149,.12);border:1px solid var(--good);color:#d6ffe6}
+  .awsboard-result.lose{background:rgba(255,180,58,.1);border:1px solid var(--amber,#ffb43a);color:#ffe6bd}
+  .awsboard-result .cli{font-family:ui-monospace,Consolas,monospace;font-size:11.5px;color:#9bff8a;margin-top:8px;white-space:pre-wrap;word-break:break-word}
+
   /* hands-on objective tracker + terminal */
   .hands-objective{margin:4px 0 12px;padding:0}
   .hands-objective .ho-title{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:6px;font-weight:700}
@@ -301,6 +339,7 @@
     <span class="tag" id="bSolvedTag" style="background:var(--good);display:none;margin-left:6px">✓ Hands-on complete</span>
     <h2 id="bTitle">Building</h2>
     <div class="plaque" id="bPlaque">plaque</div>
+    <div id="bConsole" class="awsboard"></div>
     <div id="bObjective" class="hands-objective"></div>
     <div class="demo-stage"><canvas id="demoCanvas"></canvas></div>
     <div id="bActions"></div>
@@ -505,6 +544,8 @@ let fillerWindows = [];    // filler-building windows that light up at night
 let neonMaterials = [];    // banner/sign materials that glow at night
 let fountainGroup, hologramGroup;
 let parkedCarsGroup;
+let trafficGroup;   // cars that drive along the streets
+let trafficCars = [];
 let cameraYaw = 0;         // smoothed yaw (azimuth) for camera follow + input basis
 let camPitch = 0.34;       // camera elevation (radians) — arrow Up/Down
 let camDist  = 18;         // orbit distance from player
@@ -808,6 +849,10 @@ function initWorld(){
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE_R.PCFSoftShadowMap;
+  // nicer color/lighting pipeline: filmic tone mapping + sRGB output
+  renderer.outputEncoding = THREE_R.sRGBEncoding;
+  renderer.toneMapping = THREE_R.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
   document.body.appendChild(renderer.domElement);
   window.addEventListener('resize', onResize);
 
@@ -820,7 +865,9 @@ function initWorld(){
   bannerGroup = new THREE_R.Group();
   parkedCarsGroup = new THREE_R.Group();
   ambientNpcGroup = new THREE_R.Group();
-  scene.add(bannerGroup, parkedCarsGroup, ambientNpcGroup);
+  trafficGroup = new THREE_R.Group();
+  trafficCars = [];
+  scene.add(bannerGroup, parkedCarsGroup, ambientNpcGroup, trafficGroup);
 
   // sky + celestial bodies + stars
   buildSky();
@@ -921,6 +968,7 @@ function initWorld(){
   // street furniture, parked cars, plaza + district-specific decor
   buildStreetFurniture();
   buildParkedCars();
+  buildTraffic();
   enhancePlaza();
   decorateDistricts();
 
@@ -928,7 +976,7 @@ function initWorld(){
   npcGroup = new THREE_R.Group();
   scene.add(npcGroup);
   GIGS.forEach(g=>spawnNPC(g));
-  spawnAmbientNPCs(14);
+  spawnAmbientNPCs(30);
 
   // player
   playerAvatar = buildAvatarGroup();
@@ -1522,6 +1570,60 @@ function buildParkedCars(){
 }
 
 /* =====================================================================
+   MOVING TRAFFIC — cars that drive along the two main cross-streets and
+   wrap around. Shared geometry/material; animated in updateWorld().
+   ===================================================================== */
+function buildTraffic(){
+  const bodyGeo  = new THREE_R.BoxGeometry(1.8, 1.0, 4.0);
+  const cabGeo   = new THREE_R.BoxGeometry(1.6, 0.7, 2.0);
+  const wheelGeo = new THREE_R.CylinderGeometry(0.34,0.34,0.3,10);
+  const glassMat = new THREE_R.MeshStandardMaterial({color:0xcfe6ff, transparent:true, opacity:0.6});
+  const wheelMat = new THREE_R.MeshStandardMaterial({color:0x0a0a0a});
+  const palette = [0xff5a5a,0x4aa3ff,0x2ecc71,0xffce54,0xb06bff,0xff9900,0xeceff4,0x34495e];
+  const bodyMats = palette.map(c=>new THREE_R.MeshStandardMaterial({color:c, metalness:0.5, roughness:0.45}));
+
+  function makeCar(){
+    const g = new THREE_R.Group();
+    const body = new THREE_R.Mesh(bodyGeo, bodyMats[Math.floor(Math.random()*bodyMats.length)]);
+    body.position.y = 0.65; body.castShadow = true; g.add(body);
+    const cab = new THREE_R.Mesh(cabGeo, glassMat); cab.position.set(0,1.45,-0.2); g.add(cab);
+    for(const [dx,dz] of [[-0.85,1.4],[0.85,1.4],[-0.85,-1.4],[0.85,-1.4]]){
+      const wh = new THREE_R.Mesh(wheelGeo, wheelMat);
+      wh.rotation.z = Math.PI/2; wh.position.set(dx,0.34,dz); g.add(wh);
+    }
+    // headlights/taillights for night
+    const hlMat = new THREE_R.MeshStandardMaterial({color:0xffeeaa, emissive:0xffeeaa, emissiveIntensity:0});
+    const tlMat = new THREE_R.MeshStandardMaterial({color:0x661111, emissive:0xff2222, emissiveIntensity:0});
+    const hl = new THREE_R.Mesh(new THREE_R.SphereGeometry(0.11,6,6), hlMat); hl.position.set(0.55,0.7,2.0); g.add(hl);
+    const hl2= new THREE_R.Mesh(new THREE_R.SphereGeometry(0.11,6,6), hlMat); hl2.position.set(-0.55,0.7,2.0); g.add(hl2);
+    const tl = new THREE_R.Mesh(new THREE_R.SphereGeometry(0.1,6,6), tlMat); tl.position.set(0.6,0.7,-2.0); g.add(tl);
+    const tl2= new THREE_R.Mesh(new THREE_R.SphereGeometry(0.1,6,6), tlMat); tl2.position.set(-0.6,0.7,-2.0); g.add(tl2);
+    g.userData.lights = { head:[hlMat], tail:[tlMat] };
+    return g;
+  }
+
+  const LIM = 540;
+  function addCar(axis, dir, lane){
+    const car = makeCar();
+    const p = -LIM + Math.random()*(LIM*2);
+    const speed = 9 + Math.random()*9;
+    if(axis==='ns'){
+      car.position.set(lane, 0, p);
+      car.rotation.y = dir>0 ? 0 : Math.PI;
+    } else {
+      car.position.set(p, 0, lane);
+      car.rotation.y = dir>0 ? Math.PI/2 : -Math.PI/2;
+    }
+    car.userData.drive = { axis, dir, speed, lane };
+    trafficGroup.add(car);
+    trafficCars.push(car);
+  }
+  // keep-right lanes on each street, both directions
+  for(let i=0;i<7;i++){ addCar('ns', +1, 4.5); addCar('ns', -1, -4.5); }
+  for(let i=0;i<7;i++){ addCar('ew', +1, -4.5); addCar('ew', -1, 4.5); }
+}
+
+/* =====================================================================
    PLAZA ENHANCEMENTS — fountain, tree ring, welcome arch, hologram mascot
    ===================================================================== */
 function enhancePlaza(){
@@ -1770,18 +1872,33 @@ function spawnAmbientNPCs(count){
     const head = new THREE_R.Mesh(new THREE_R.BoxGeometry(0.55,0.55,0.55),
       new THREE_R.MeshStandardMaterial({color:skin}));
     head.position.y = 2.35; g.add(head);
-    // pick a target & speed
-    g.userData.target = pickPlazaTarget();
-    g.userData.speed  = 1.6 + Math.random()*1.4;
+    // Each pedestrian has a "home" area (plaza or a district) and wanders around it.
+    let home;
+    if(i % 5 === 0){ home = new THREE_R.Vector3(0,0,0); }   // ~20% in the plaza
+    else {
+      const dl = Object.values(DISTRICTS)[i % 4];
+      home = new THREE_R.Vector3(dl.center[0] + (Math.random()-0.5)*120, 0, dl.center[2] + (Math.random()-0.5)*120);
+    }
+    g.userData.home = home;
+    g.position.copy(pickWanderTarget(home));
+    g.userData.target = pickWanderTarget(home);
+    g.userData.speed  = 1.7 + Math.random()*1.6;
     g.userData.walkPhase = Math.random()*Math.PI*2;
     ambientNpcGroup.add(g);
   }
 }
-function pickPlazaTarget(){
+// a wander point around a home center, nudged off the street centerlines
+function pickWanderTarget(home){
   const ang = Math.random()*Math.PI*2;
-  const r = 14 + Math.random()*36;
-  return new THREE_R.Vector3(Math.cos(ang)*r, 0, Math.sin(ang)*r);
+  const r = 10 + Math.random()*34;
+  let x = home.x + Math.cos(ang)*r;
+  let z = home.z + Math.sin(ang)*r;
+  if(Math.abs(x) < 13) x += (x<0?-1:1)*13;   // keep off the main roads
+  if(Math.abs(z) < 13) z += (z<0?-1:1)*13;
+  return new THREE_R.Vector3(x, 0, z);
 }
+// backwards-compatible alias
+function pickPlazaTarget(){ return pickWanderTarget(new THREE_R.Vector3(0,0,0)); }
 
 /* =====================================================================
    LANDMARK BUILDERS — each visual is distinct
@@ -2251,13 +2368,16 @@ function updatePlayer(dt){
     // behind the camera lerp is on this frame.
     const yaw = cameraYaw;
     const forward = new THREE_R.Vector3(Math.sin(yaw), 0, Math.cos(yaw));
-    const right   = new THREE_R.Vector3(Math.cos(yaw), 0, -Math.sin(yaw));
+    // screen-right vector (A strafes left, D strafes right)
+    const right   = new THREE_R.Vector3(-Math.cos(yaw), 0, Math.sin(yaw));
     const move = new THREE_R.Vector3();
     move.addScaledVector(forward, -mz);
-    move.addScaledVector(right, mx);
+    move.addScaledVector(right, mx * 0.85);   // lateral a touch slower than forward
     const onVehicle = !!player.vehicle;
-    let speed = onVehicle ? 28 : (sprint?12:7);
-    move.normalize().multiplyScalar(speed*dt);
+    // a bit calmer than before so it doesn't feel twitchy
+    let speed = onVehicle ? 24 : (sprint ? 9 : 5.2);
+    if(move.length() > 1) move.normalize();
+    move.multiplyScalar(speed*dt);
     playerMesh.position.add(move);
     // face heading
     const targetYaw = Math.atan2(move.x, move.z);
@@ -2454,7 +2574,7 @@ function updateWorld(dt){
     n.userData.exG.rotation.y += dt*0.5;
   });
 
-  // ---------- ambient NPCs walk around plaza ----------
+  // ---------- ambient NPCs walk around their home area ----------
   if(ambientNpcGroup) ambientNpcGroup.children.forEach(n=>{
     const tgt = n.userData.target;
     if(!tgt) return;
@@ -2462,7 +2582,7 @@ function updateWorld(dt){
     const dz = tgt.z - n.position.z;
     const dist = Math.hypot(dx,dz);
     if(dist < 1.5){
-      n.userData.target = pickPlazaTarget();
+      n.userData.target = pickWanderTarget(n.userData.home || new THREE_R.Vector3(0,0,0));
     } else {
       const sp = n.userData.speed * dt;
       n.position.x += (dx/dist) * sp;
@@ -2480,6 +2600,28 @@ function updateWorld(dt){
       });
     }
   });
+
+  // ---------- moving traffic ----------
+  const TLIM = 540;
+  for(let i=0;i<trafficCars.length;i++){
+    const car = trafficCars[i];
+    const d = car.userData.drive;
+    const step = d.speed * dt * d.dir;
+    if(d.axis==='ns'){
+      car.position.z += step;
+      if(car.position.z >  TLIM) car.position.z = -TLIM;
+      if(car.position.z < -TLIM) car.position.z =  TLIM;
+    } else {
+      car.position.x += step;
+      if(car.position.x >  TLIM) car.position.x = -TLIM;
+      if(car.position.x < -TLIM) car.position.x =  TLIM;
+    }
+    // head/tail lights at night
+    if(car.userData.lights){
+      car.userData.lights.head.forEach(m=>m.emissiveIntensity = night*0.9);
+      car.userData.lights.tail.forEach(m=>m.emissiveIntensity = night*0.8);
+    }
+  }
 
   // ---------- fountain + hologram animation ----------
   if(fountainGroup){
@@ -2675,10 +2817,18 @@ function openBuilding(b){
   document.getElementById('bPlaque').textContent = b.plaque;
   document.getElementById('bActions').innerHTML = '';
 
-  // mount the right interactive demo
-  startDemo(b);
-  // set up the hands-on objectives + terminal for this building
-  handsSetup(b);
+  // Show the AWS console configuration board if this building has one; otherwise
+  // fall back to the legacy interactive demo + objective/terminal.
+  if(CONSOLE_LABS[b.id]){
+    if(activeBuildingDemo){ activeBuildingDemo.stop = true; activeBuildingDemo = null; }
+    showConsoleLab(b);
+  } else {
+    const stage = document.querySelector('#buildingOverlay .demo-stage'); if(stage) stage.style.display='';
+    ['bObjective','bActions','bTerminal'].forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display=''; });
+    const con = document.getElementById('bConsole'); if(con){ con.classList.remove('show'); con.innerHTML=''; }
+    startDemo(b);
+    handsSetup(b);
+  }
 
   // award badge
   if(!player.badges.has(b.id)){
@@ -2931,6 +3081,212 @@ const HANDSON_CMDS = {
       resp:['→ edge cache live in Virginia — Americas served locally'], respCls:['ok'] },
   },
 };
+
+/* =====================================================================
+   AWS CONSOLE LABS — the real hands-on. Each building shows a scenario and
+   a set of real AWS configuration dropdowns; you pick the right values like
+   in the actual console. Validated locally. (Content reviewed for accuracy.)
+   ===================================================================== */
+const CONSOLE_LABS = {
+  ec2:{ service:'EC2', consoleTitle:'EC2 · Launch an instance', submitLabel:'Launch instance',
+    scenario:"You're standing up a brand-new booking website for a small seaside resort. Traffic is light and bursty — a handful of guests during the day, near-zero overnight — and the budget is tight. The site must be reachable from the open internet on a free, well-supported Linux base with no extra licensing.",
+    hint:"Think bursty-and-tiny, not always-on-and-huge — and the site has to answer from the public internet.",
+    successMsg:"Right-sized and budget-friendly. A free-tier Linux AMI on a burstable t3.micro/t3.small with a gp3 root volume and a public IP is exactly how you launch a small, low-traffic site without overpaying.",
+    fields:[
+      {id:'ami',label:'Amazon Machine Image (AMI)',options:['Amazon Linux 2023 (Free tier eligible)','Ubuntu Server 22.04 LTS (Free tier eligible)','Red Hat Enterprise Linux 9 (paid subscription)','Windows Server 2022 Base (license included)','macOS Sonoma 14'],correct:['Amazon Linux 2023 (Free tier eligible)','Ubuntu Server 22.04 LTS (Free tier eligible)'],explain:"A free-tier Linux base (Amazon Linux 2023 or Ubuntu 22.04 LTS) carries no extra licensing. RHEL bundles a paid subscription, Windows adds per-hour license fees, and macOS is for Mac builds on dedicated hosts."},
+      {id:'instanceType',label:'Instance type',options:['t3.micro','t3.small','t3.large','m5.xlarge','c5.4xlarge','r5.2xlarge'],correct:['t3.micro','t3.small'],explain:"Light, bursty traffic is the textbook case for a burstable T-family instance — t3.micro/t3.small bank CPU credits while idle. m5.xlarge / c5.4xlarge / r5.2xlarge are sized for sustained heavy workloads and are wildly oversized here."},
+      {id:'ebs',label:'Root EBS volume type',options:['gp3 (General Purpose SSD)','gp2 (General Purpose SSD)','io2 (Provisioned IOPS SSD)','st1 (Throughput Optimized HDD)','sc1 (Cold HDD)'],correct:['gp3 (General Purpose SSD)'],explain:"gp3 is the current general-purpose SSD: cheaper than gp2 with free baseline IOPS. io2 is overkill, and st1/sc1 are HDDs that can't even be boot volumes."},
+      {id:'publicip',label:'Auto-assign public IP',options:['Enable','Disable','Use subnet setting'],correct:['Enable'],explain:"The site must be reachable from the internet, so it needs a public IP. Disabling it would leave the web server unreachable without extra NAT/load-balancer plumbing."},
+    ]},
+  lambda:{ service:'Lambda', consoleTitle:'Lambda · Create function', submitLabel:'Create function',
+    scenario:"You need a small function that generates a thumbnail each time a user drops a new photo into a storage bucket. Uploads are sporadic, the work is lightweight, and the handler is written in Python. Bill only when an upload actually happens.",
+    hint:"Match the runtime to the language, size it for a light image resize, and pick the source that fires on a new object in a bucket.",
+    successMsg:"A lean, Python-based thumbnail function that wakes up only when a new photo is uploaded — sized just right for light image work.",
+    fields:[
+      {id:'runtime',label:'Runtime',options:['Python 3.12','Node.js 20.x','Java 21','Go 1.x','.NET 8','Ruby 3.3'],correct:['Python 3.12'],explain:"The handler is Python, so the Python 3.12 runtime fits. Node/Java/Go/.NET/Ruby can't run Python code (and Java adds heavy cold starts)."},
+      {id:'memory',label:'Memory (MB)',options:['128','512','1024','3008','10240'],correct:['512'],explain:"512 MB gives enough headroom (and proportional CPU) for resizing one image cheaply. 128 MB is CPU-starved; 3008/10240 MB is gross over-provisioning that raises GB-second cost."},
+      {id:'trigger',label:'Trigger / event source',options:['S3','API Gateway','DynamoDB Streams','EventBridge','SQS'],correct:['S3'],explain:"A new photo landing in the bucket is an S3 object-created event. API Gateway is HTTP, DynamoDB Streams reacts to table changes, SQS to queue messages."},
+      {id:'timeout',label:'Timeout',options:['3 seconds','30 seconds','60 seconds','5 minutes','15 minutes'],correct:['30 seconds'],explain:"Resizing one image finishes in seconds; 30s is a safe ceiling allowing for cold starts and large files. 3s is too tight; 5/15 min only delays failure detection."},
+    ]},
+  asg:{ service:'Auto Scaling', consoleTitle:'EC2 Auto Scaling · Create group', submitLabel:'Create Auto Scaling group',
+    scenario:"An online shop behind an Application Load Balancer is calm most of the day, but flash sales trigger sudden surges that must not take the site down. Off-peak, the fleet should shrink so you aren't paying for idle servers. Grow/shrink automatically on CPU load, and pull instances the moment they stop serving requests at the load balancer.",
+    hint:"Stay lean when quiet, have room to grow when loud, and let the load balancer decide what's truly healthy.",
+    successMsg:"Lean min/desired of 2 keeps off-peak cost down, max 20 absorbs surges, target tracking scales both ways on CPU, and ELB health checks pull instances the instant they stop serving traffic.",
+    fields:[
+      {id:'min',label:'Minimum capacity',options:['0','1','2','10','20'],correct:['2'],explain:"Min 2 keeps a small cross-AZ baseline so the shop never serves from zero, without paying for idle servers. Min 10/20 wastes money off-peak; min 0 risks an empty fleet at the start of a spike."},
+      {id:'max',label:'Maximum capacity',options:['2','4','6','20','100'],correct:['20'],explain:"Max 20 gives headroom to absorb a flash-sale surge. A max near the minimum caps scaling before a spike; 100 is needlessly high and invites runaway cost."},
+      {id:'desired',label:'Desired capacity',options:['0','1','2','10','20'],correct:['2'],explain:"Start desired at the steady-state baseline (2) and let the policy add instances only when demand rises. Starting at 10/20 pre-provisions for a spike that isn't happening."},
+      {id:'policy',label:'Scaling policy type',options:['Target tracking scaling','Step scaling','Simple scaling','Manual scaling (none)'],correct:['Target tracking scaling'],explain:"Target tracking holds a metric like average CPU at a set value and scales both up and down on its own. Step/Simple need hand-authored alarms; Manual can't react to surprise spikes."},
+      {id:'health',label:'Health check type',options:['EC2','ELB','EC2 and ELB'],correct:['ELB'],explain:"Behind a load balancer you want instances pulled when they fail the target-group checks. EC2-only checks see a hung-but-running server as healthy and keep sending it traffic."},
+    ]},
+  s3:{ service:'S3', consoleTitle:'S3 · Create bucket + lifecycle', submitLabel:'Create bucket',
+    scenario:"Your app lets users upload personal photos. They must never be reachable from the open internet — only your app's IAM roles should read them. Keep every photo indefinitely but slash cost on pictures untouched for a year, accepting that retrieving those rare old photos may take hours.",
+    hint:"Private by default, keep every version, encrypt cheaply, and pick the lowest-cost archive tier when slow retrieval is acceptable.",
+    successMsg:"Locked down with Block Public Access on, versioned for durability, encrypted at rest, and a lifecycle rule that archives year-old photos to the cheapest tier.",
+    fields:[
+      {id:'bpa',label:'Block Public Access',options:['Block all public access (On)','Off (allow public access)','Block public access granted through new ACLs only'],correct:['Block all public access (On)'],explain:"Photos must stay private, so keep all four controls on. Off exposes objects if any policy/ACL grants public read; blocking new ACLs only still leaves other paths open."},
+      {id:'versioning',label:'Bucket Versioning',options:['Enable','Disable','Suspend'],correct:['Enable'],explain:"Keeping every photo and surviving accidental overwrites/deletes is exactly versioning. Disable leaves a single object an overwrite destroys; Suspend pauses an already-versioned bucket."},
+      {id:'encryption',label:'Default encryption',options:['SSE-S3 (Amazon S3 managed keys)','SSE-KMS (AWS KMS keys)','DSSE-KMS (dual-layer KMS)','None'],correct:['SSE-S3 (Amazon S3 managed keys)','SSE-KMS (AWS KMS keys)'],explain:"Private data should be encrypted at rest. SSE-S3 is the free zero-management default; SSE-KMS adds an audit trail at extra cost. None leaves photos unencrypted; DSSE-KMS is regulatory overkill."},
+      {id:'lifecycle',label:'Lifecycle transition for objects older than 365 days',options:['S3 Standard','S3 Standard-IA','S3 Intelligent-Tiering','S3 Glacier Flexible Retrieval','S3 Glacier Deep Archive'],correct:['S3 Glacier Deep Archive'],explain:"Cheapest long-term archive with multi-hour retrieval accepted = Glacier Deep Archive. Standard-IA/Intelligent-Tiering cost more; Standard isn't even a valid transition target."},
+    ]},
+  ebs:{ service:'EBS', consoleTitle:'EBS · Create volume', submitLabel:'Create volume',
+    scenario:"You're provisioning the root/boot disk for a single small Linux web server hosting a low-traffic company site. Budget matters, traffic is modest — you want the cheapest volume that still boots and stays latency-friendly, no six-figure IOPS. Company policy requires data at rest to be protected.",
+    hint:"Cheapest SSD that can still boot, sized for an OS not a data lake, and remember the data-at-rest policy.",
+    successMsg:"An encrypted gp3 boot volume at baseline 3,000 IOPS, right-sized at 8–30 GiB — the cheapest, policy-compliant setup for a small web server.",
+    fields:[
+      {id:'voltype',label:'Volume type',options:['gp3 (General Purpose SSD)','gp2 (General Purpose SSD)','io2 (Provisioned IOPS SSD)','st1 (Throughput Optimized HDD)','sc1 (Cold HDD)'],correct:['gp3 (General Purpose SSD)'],explain:"gp3 is bootable, low-latency, and the cheapest SSD per GiB with free baseline IOPS. gp2 costs more, io2 is for high-IOPS databases, st1/sc1 are HDDs that can't be boot volumes."},
+      {id:'size',label:'Size (GiB)',options:['8','30','100','500','16384'],correct:['8','30'],explain:"A boot disk for a small server needs room for the OS and modest content — 8 or 30 GiB fits and stays cheap (30 GiB is the free-tier EBS allowance). 100/500/16384 GiB waste money."},
+      {id:'enc',label:'Encryption',options:['Encrypted with aws/ebs (AWS managed key)','Encrypted with a customer managed KMS key','Not encrypted (Off)'],correct:['Encrypted with aws/ebs (AWS managed key)','Encrypted with a customer managed KMS key'],explain:"Policy requires encryption at rest, so On — the free AWS managed key is the easy fit; a customer-managed KMS key also satisfies it. Off violates the policy."},
+      {id:'iops',label:'IOPS',options:['3000 (gp3 baseline)','6000','16000','80000'],correct:['3000 (gp3 baseline)'],explain:"gp3 includes 3,000 IOPS free, easily covering a low-traffic server. 6,000/16,000 are billable; 80,000 is the gp3 max for heavy databases."},
+    ]},
+  glacier:{ service:'S3 Glacier', consoleTitle:'S3 Glacier · Initiate retrieval', submitLabel:'Initiate retrieval job',
+    scenario:"The legal team requested a contract file archived five years ago for lowest-cost long-term retention. There's no deadline — they just need it back eventually and want to spend as little as possible on the retrieval.",
+    hint:"No deadline plus cheapest-possible points you toward the slowest tier and the lowest-cost long-term storage class.",
+    successMsg:"A Bulk retrieval from Glacier Deep Archive is the cheapest path, and the file will be ready within ~48 hours — fine for a non-urgent legal request.",
+    fields:[
+      {id:'class',label:'Source storage class',options:['S3 Glacier Instant Retrieval','S3 Glacier Flexible Retrieval','S3 Glacier Deep Archive','S3 Standard-IA'],correct:['S3 Glacier Deep Archive'],explain:"A five-year, lowest-cost archive lives in Glacier Deep Archive. Flexible Retrieval costs more per GB; Instant Retrieval and Standard-IA are far pricier and for millisecond access."},
+      {id:'tier',label:'Retrieval tier',options:['Expedited','Standard','Bulk'],correct:['Bulk'],explain:"No urgency + cheapest = Bulk, the lowest-cost retrieval. Expedited is most expensive (and not offered for Deep Archive); Standard is faster but pricier than Bulk."},
+      {id:'time',label:'Acknowledge estimated retrieval time',options:['Within 1–5 minutes','Within 3–5 hours','Within 12 hours','Within 48 hours'],correct:['Within 48 hours'],explain:"Bulk from Deep Archive returns within ~48 hours. 12 hours is the Standard tier; the minutes/hours options are Expedited or Flexible Retrieval, which don't apply here."},
+    ]},
+  rds:{ service:'RDS', consoleTitle:'RDS · Create database', submitLabel:'Create database',
+    scenario:"A customer-facing web app stores orders, users and inventory in well-defined tables with foreign keys and frequent multi-table joins. Traffic is steady and moderate — a few hundred concurrent users at peak, nothing spiky. You need point-in-time recovery, can tolerate a brief read pause, and want a reasonable bill for a single primary database.",
+    hint:"Match the engine to relational + strict schema + joins, then size compute and resilience to moderate traffic, single primary, cost-aware.",
+    successMsg:"A right-sized open-source relational engine on a general-purpose instance with cost-effective gp3 storage and a single-AZ deployment — balanced and production-ready.",
+    fields:[
+      {id:'engine',label:'Engine type',options:['Aurora MySQL','Aurora PostgreSQL','MySQL','PostgreSQL','MariaDB','Microsoft SQL Server','Oracle'],correct:['MySQL','PostgreSQL','MariaDB'],explain:"Strict schemas, foreign keys and joins are delivered by the open-source community engines (MySQL/PostgreSQL/MariaDB) with automated backups. Aurora is a cost/ops step up for high scale; SQL Server/Oracle carry expensive licensing."},
+      {id:'class',label:'DB instance class',options:['db.t3.micro','db.t3.medium','db.m5.large','db.r5.2xlarge'],correct:['db.t3.medium','db.m5.large'],explain:"A few hundred users fits db.t3.medium (burstable) or db.m5.large (steady). db.t3.micro is undersized for production; db.r5.2xlarge is a memory-optimized box for very large datasets — wasteful here."},
+      {id:'az',label:'Availability and durability',options:['Single-AZ DB instance (1 instance)','Multi-AZ DB instance (1 standby)','Multi-AZ DB cluster (2 readable standbys)'],correct:['Single-AZ DB instance (1 instance)'],explain:"A single primary is fine and a brief read pause is tolerable, so Single-AZ keeps cost down while backups still give point-in-time recovery. Multi-AZ ~doubles cost for failover you don't require."},
+      {id:'storage',label:'Storage type',options:['gp3 (General Purpose SSD)','gp2 (General Purpose SSD)','io1 (Provisioned IOPS SSD)'],correct:['gp3 (General Purpose SSD)'],explain:"gp3 is the current best-value default with IOPS independent of size. gp2 ties IOPS to size; io1 is a premium tier for very high latency-sensitive I/O."},
+    ]},
+  dynamo:{ service:'DynamoDB', consoleTitle:'DynamoDB · Create table', submitLabel:'Create table',
+    scenario:"A leaderboard store for a multiplayer game. The app only ever fetches a single player's record by their unique player ID, never scans ranges. Traffic is wildly unpredictable: dead quiet overnight, then a tournament spikes requests 50x in seconds. You don't want to babysit throughput or risk throttling.",
+    hint:"Think about what you look players up BY, and which mode survives a surprise 50x spike without throttling.",
+    successMsg:"PlayerId gives even single-item access, On-demand absorbs tournament spikes with zero capacity planning, eventually-consistent reads keep it cheap, and skipping unused indexes keeps writes lean.",
+    fields:[
+      {id:'pk',label:'Partition key',options:['PlayerId (String)','Score (Number)','Region (String)','GameId (String)','Timestamp (Number)'],correct:['PlayerId (String)'],explain:"Lookups are by player id, so PlayerId is a unique, high-cardinality key that spreads load evenly. Score isn't unique, is mutable, and you never look up by it."},
+      {id:'capacity',label:'Capacity mode',options:['On-demand','Provisioned','Provisioned with auto scaling'],correct:['On-demand'],explain:"Spiky, unpredictable 50x bursts are exactly what On-demand handles — instant per-request scaling, no planning, no throttling. Provisioned (even auto-scaled) reacts on a delay and would throttle the spike."},
+      {id:'consistency',label:'Read consistency (default for GetItem)',options:['Eventually consistent','Strongly consistent','Transactional (ACID)'],correct:['Eventually consistent'],explain:"A leaderboard tolerates sub-second lag, so eventually-consistent reads cost half as much and give higher throughput. Strong doubles cost; transactional is for multi-item ACID."},
+      {id:'gsi',label:'Secondary indexes',options:['No secondary index','Global secondary index on Score','Local secondary index on Score','Global secondary index on Region'],correct:['No secondary index'],explain:"The only access pattern is single-item by id, which the base table already serves. An unused index just doubles write cost (and an LSI isn't even possible without a composite key)."},
+    ]},
+  vpc:{ service:'VPC', consoleTitle:'VPC · Place the database securely', submitLabel:'Create database',
+    scenario:"Your three-tier app runs EC2 app servers in a VPC that read/write an RDS database. Compliance requires the database is never reachable from the open internet — only the application tier may connect. Configure where the DB lives and who can talk to it.",
+    hint:"\"Private\" isn't a checkbox — it's the absence of an internet path plus a tightly scoped source.",
+    successMsg:"The database sits in a private subnet with no internet-gateway route, is not publicly accessible, and only accepts connections from the app-tier security group — reachable by your app servers, invisible to the internet.",
+    fields:[
+      {id:'subnet',label:'Subnet placement for the DB',options:['Public subnet','Private subnet','Isolated subnet (no NAT, no IGW)'],correct:['Private subnet','Isolated subnet (no NAT, no IGW)'],explain:"A private/isolated subnet has no route to the internet gateway, so the DB can't be reached from outside while app servers inside the VPC still can. A public subnet would expose it."},
+      {id:'igw',label:'Route to internet gateway (0.0.0.0/0 → igw)',options:['Yes','No','Only outbound via NAT gateway'],correct:['No'],explain:"Omitting the 0.0.0.0/0 → IGW route is what makes the subnet private. Adding it would expose the DB; a NAT route is only outbound and unneeded for a DB serving in-VPC app servers."},
+      {id:'sg',label:'Security group inbound source (port 3306/5432)',options:['0.0.0.0/0','App-tier security group','Your IP only','VPC CIDR block'],correct:['App-tier security group'],explain:"Referencing the app-tier security group scopes access to just the app servers and keeps working as they autoscale. 0.0.0.0/0 is the whole internet; the VPC CIDR is broader than needed."},
+      {id:'public',label:'Publicly accessible',options:['Yes','No','Yes, but restrict with security group'],correct:['No'],explain:"No means RDS assigns no public IP and the DB resolves only via its private endpoint. Yes attaches a public endpoint — unnecessary when only in-VPC app servers need access."},
+    ]},
+  r53:{ service:'Route 53', consoleTitle:'Route 53 · Create record', submitLabel:'Create records',
+    scenario:"Your storefront runs behind an ALB in us-east-1, with an identical hot-standby stack in us-west-2. shop.example.com should send shoppers to the primary while it's healthy and automatically swing to the backup region the moment the primary stops responding — without exposing the load balancer's changing IPs.",
+    hint:"Failover needs a way to know the primary is down, and an Alias avoids hard-coding the ALB's shifting IPs.",
+    successMsg:"An Alias A record set as the Primary failover record, with a health check on the primary ALB, sends shoppers to us-east-1 while healthy and swings to us-west-2 on failure.",
+    fields:[
+      {id:'type',label:'Record type',options:['A','AAAA','CNAME','MX'],correct:['A'],explain:"An A record with an Alias target resolves the name directly to the ALB without a static IP. CNAME is billed per query and can't sit at a zone apex; MX is mail; AAAA is IPv6."},
+      {id:'policy',label:'Routing policy',options:['Simple routing','Weighted','Latency','Failover','Geolocation'],correct:['Failover'],explain:"Failover is built for active-passive: serve the primary while healthy, switch to the secondary when it fails. Weighted/Latency don't guarantee failover-only behavior; Simple has no health switching."},
+      {id:'alias',label:'Alias target',options:['Alias to Application and Classic Load Balancer','Alias to CloudFront distribution','Alias to S3 website endpoint','IP address (no alias)'],correct:['Alias to Application and Classic Load Balancer'],explain:"The endpoint is an ALB, so the alias target type is Application and Classic Load Balancer — Route 53 tracks its IPs automatically. CloudFront/S3 point at the wrong resource; a plain IP breaks on change."},
+      {id:'failtype',label:'Failover record type',options:['Primary','Secondary','Active-active'],correct:['Primary'],explain:"This record is the us-east-1 active stack, so its failover type is Primary. Secondary is the us-west-2 record; 'Active-active' isn't a valid failover type."},
+      {id:'health',label:'Health check',options:['Associate a health check on the primary ALB','No health check','Evaluate target health'],correct:['Associate a health check on the primary ALB'],explain:"Failover only works if Route 53 knows when the primary is down, so the Primary record needs a health check on the ALB. 'No health check' breaks it; 'Evaluate target health' isn't a substitute."},
+    ]},
+  cf:{ service:'CloudFront', consoleTitle:'CloudFront · Create distribution', submitLabel:'Create distribution',
+    scenario:"A photography portfolio site has visitors on every continent. The full-res images live in object storage and rarely change once uploaded. Pages feel slow for users far from your origin. Serve every request over HTTPS with as little re-fetching from the origin as possible — covering the whole planet, no more.",
+    hint:"Global reach, encrypted delivery, and content that almost never changes.",
+    successMsg:"Photos are cached at edge locations worldwide and served over HTTPS — global visitors get fast, secure delivery with minimal origin fetches.",
+    fields:[
+      {id:'origin',label:'Origin domain',options:['S3 bucket','Application Load Balancer','Custom HTTP origin'],correct:['S3 bucket'],explain:"Static images in object storage = an S3 bucket origin (pairs with Origin Access Control). ALB/custom HTTP origins are for dynamic app servers you don't have here."},
+      {id:'protocol',label:'Viewer protocol policy',options:['Redirect HTTP to HTTPS','HTTPS only','HTTP and HTTPS'],correct:['Redirect HTTP to HTTPS'],explain:"Redirecting to HTTPS guarantees encryption without dropping users who type a bare http:// link. 'HTTPS only' rejects http outright; 'HTTP and HTTPS' allows insecure delivery."},
+      {id:'price',label:'Price class',options:['Use all edge locations (best performance)','Use only North America and Europe','North America, Europe, Asia, Middle East, Africa'],correct:['Use all edge locations (best performance)'],explain:"Visitors are on every continent, so the full global edge footprint is needed. The partial classes leave regions like South America and Oceania on distant edges."},
+      {id:'cache',label:'Cache policy',options:['CachingOptimized','CachingDisabled','CachingOptimizedForUncompressedObjects'],correct:['CachingOptimized'],explain:"Rarely-changing images + minimal origin fetches = CachingOptimized (generous TTLs, compression). CachingDisabled forces every request to the origin; the uncompressed variant is for already-compressed assets."},
+    ]},
+};
+
+// Render the AWS console board for a building; returns true if a lab exists.
+function showConsoleLab(b){
+  const lab = CONSOLE_LABS[b.id];
+  const host = document.getElementById('bConsole');
+  if(!lab || !host){ if(host){ host.classList.remove('show'); host.innerHTML=''; } return false; }
+  // hide the old demo widgets — the board is the hands-on now
+  ['bObjective','bActions','bTerminal'].forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display='none'; });
+  const stage = document.querySelector('#buildingOverlay .demo-stage'); if(stage) stage.style.display='none';
+
+  const solved = player.handsonSolved.has(b.id);
+  host.classList.add('show');
+  host.innerHTML =
+    `<div class="awsboard-head"><span class="awsdot"></span><span class="svc">${lab.consoleTitle}</span><span class="region">us-east-1</span></div>`+
+    `<div class="awsboard-body">`+
+      `<div class="awsboard-scenario"><b>Scenario.</b> ${lab.scenario}</div>`+
+      (lab.hint?`<div class="awsboard-hint">${lab.hint}</div>`:'')+
+      `<div class="awsboard-fields">`+
+        lab.fields.map((f,i)=>
+          `<div class="awsfield" data-i="${i}">`+
+            `<span class="awsfield-label">${f.label}<span class="req">*</span></span>`+
+            `<select data-i="${i}"><option value="">— Select —</option>`+
+              f.options.map(o=>`<option value="${o.replace(/"/g,'&quot;')}">${o}</option>`).join('')+
+            `</select>`+
+            `<div class="awsfield-explain"></div>`+
+          `</div>`
+        ).join('')+
+      `</div>`+
+      `<div class="awsboard-actions">`+
+        `<button class="awsboard-submit" id="awsSubmit">${lab.submitLabel}</button>`+
+        `<button class="awsboard-reset" id="awsReset">Reset</button>`+
+        `<span class="awsboard-progress" id="awsProgress"></span>`+
+      `</div>`+
+      `<div class="awsboard-result" id="awsResult"></div>`+
+    `</div>`;
+
+  document.getElementById('awsSubmit').onclick = ()=>gradeConsoleLab(b);
+  document.getElementById('awsReset').onclick  = ()=>showConsoleLab(b);
+  if(solved){
+    const tag=document.getElementById('bSolvedTag'); if(tag) tag.style.display='inline-block';
+  }
+  return true;
+}
+
+function gradeConsoleLab(b){
+  const lab = CONSOLE_LABS[b.id];
+  const host = document.getElementById('bConsole');
+  if(!lab || !host) return;
+  const rows = host.querySelectorAll('.awsfield');
+  let correctCount = 0, answered = 0;
+  lab.fields.forEach((f,i)=>{
+    const row = rows[i];
+    const sel = row.querySelector('select');
+    const val = sel.value;
+    const exp = row.querySelector('.awsfield-explain');
+    row.classList.remove('ok','bad');
+    if(val) answered++;
+    const ok = f.correct.includes(val);
+    if(ok){ row.classList.add('ok'); correctCount++; exp.textContent = '✓ ' + f.explain; }
+    else  { row.classList.add('bad'); exp.textContent = (val? '✗ ' : 'Pick a value. ') + f.explain; }
+  });
+  const total = lab.fields.length;
+  const prog = document.getElementById('awsProgress');
+  if(prog) prog.textContent = correctCount + ' / ' + total + ' correct';
+  const res = document.getElementById('awsResult');
+  res.classList.remove('win','lose');
+  if(correctCount === total){
+    res.classList.add('show','win');
+    res.innerHTML = `<b>✓ ${lab.submitLabel} — success.</b> ${lab.successMsg}`;
+    completeConsoleLab(b);
+  } else {
+    res.classList.add('show','lose');
+    res.innerHTML = `<b>${correctCount} of ${total} correct.</b> Review the highlighted fields (red) and adjust your choices, then submit again.`;
+  }
+}
+
+function completeConsoleLab(b){
+  const tag=document.getElementById('bSolvedTag'); if(tag) tag.style.display='inline-block';
+  if(!player.handsonSolved.has(b.id)){
+    player.handsonSolved.add(b.id);
+    showToast('Hands-on complete', b.name + ' configured correctly (' + player.handsonSolved.size + '/' + LANDMARKS.length + ').');
+    if(activeGig){
+      const g = GIGS.find(x=>x.id===activeGig.id);
+      if(g && g.target === b.id){ activeGig.step = Math.max(activeGig.step, g.steps.length - 1); renderMission(); }
+    }
+  }
+}
 
 function handsBody(){
   const t = document.getElementById('bTerminal');
