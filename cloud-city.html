@@ -129,22 +129,22 @@
   /* ===== AWS console board (configuration hands-on) ===== */
   #bConsole{display:none}
   #bConsole.show{display:block}
-  .awsboard{margin:6px 0 4px;border:1px solid rgba(255,153,0,.4);border-radius:12px;background:linear-gradient(180deg,#0f1729,#0a0f1d);overflow:hidden}
-  .awsboard-head{background:#16202f;border-bottom:1px solid rgba(255,255,255,.08);padding:10px 14px;display:flex;align-items:center;gap:10px}
-  .awsboard-head .awsdot{width:10px;height:10px;border-radius:2px;background:var(--orange)}
+  .awsboard{margin:6px 0 4px;border:1px solid #3a4a63;border-radius:12px;background:linear-gradient(180deg,#16213a,#0e1626);overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.45)}
+  .awsboard-head{background:#232f3e;border-top:3px solid var(--orange);border-bottom:1px solid rgba(0,0,0,.3);padding:11px 14px;display:flex;align-items:center;gap:10px}
+  .awsboard-head .awsdot{width:11px;height:11px;border-radius:3px;background:var(--orange);box-shadow:0 0 8px rgba(255,153,0,.6)}
   .awsboard-head .svc{font-weight:800;letter-spacing:.3px;color:#fff;font-size:15px}
-  .awsboard-head .region{margin-left:auto;font-family:ui-monospace,Consolas,monospace;font-size:10.5px;color:#8aa0c0;border:1px solid rgba(255,255,255,.12);padding:2px 7px;border-radius:5px}
-  .awsboard-body{padding:14px 16px}
-  .awsboard-scenario{font-size:13.5px;line-height:1.55;color:#dbe7f5;background:rgba(122,217,255,.07);border-left:3px solid #7ad9ff;padding:9px 12px;border-radius:0 8px 8px 0;margin-bottom:10px}
-  .awsboard-scenario b{color:#7ad9ff}
+  .awsboard-head .region{margin-left:auto;font-family:ui-monospace,Consolas,monospace;font-size:10.5px;color:var(--orange);background:rgba(255,153,0,.12);border:1px solid rgba(255,153,0,.4);padding:3px 9px;border-radius:5px}
+  .awsboard-body{padding:15px 16px}
+  .awsboard-scenario{font-size:13.5px;line-height:1.55;color:#eaf2ff;background:rgba(86,158,255,.12);border-left:3px solid #4aa3ff;padding:10px 13px;border-radius:0 8px 8px 0;margin-bottom:10px}
+  .awsboard-scenario b{color:#5aa9ff}
   .awsboard-hint{font-family:ui-monospace,Consolas,monospace;font-size:11.5px;color:#b48bff;margin:0 2px 14px}
   .awsboard-hint::before{content:"↳ PILOT: ";color:#caa6ff}
   .awsfield{display:block;margin-bottom:13px}
-  .awsfield-label{display:block;font-size:12px;font-weight:600;color:#cfe0f5;margin-bottom:5px}
+  .awsfield-label{display:block;font-size:12.5px;font-weight:700;color:#e8eefb;margin-bottom:5px}
   .awsfield-label .req{color:var(--orange);margin-left:3px}
   .awsfield select{width:100%;appearance:none;-webkit-appearance:none;font-family:inherit;font-size:13.5px;color:#fff;
-    background:#0a1322 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12'><path d='M2 4l4 4 4-4' fill='none' stroke='%23ff9900' stroke-width='1.6'/></svg>") no-repeat right 12px center;
-    border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:11px 34px 11px 12px;cursor:pointer}
+    background:#1b2740 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12'><path d='M2 4l4 4 4-4' fill='none' stroke='%23ff9900' stroke-width='1.6'/></svg>") no-repeat right 12px center;
+    border:1px solid #44557a;border-radius:8px;padding:11px 34px 11px 12px;cursor:pointer}
   .awsfield select:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 2px rgba(255,153,0,.25)}
   .awsfield.ok select{border-color:var(--good);box-shadow:0 0 0 2px rgba(92,219,149,.25)}
   .awsfield.bad select{border-color:var(--bad);box-shadow:0 0 0 2px rgba(255,107,107,.22)}
@@ -405,12 +405,18 @@ const THREE_R = THREE; // local alias
 
 // ---------- Palette / config ----------
 const PALETTE = {
-  compute:  { ground:'#3a4d2b', accent:'#9ad36c', sky:'#a4d8ff' },   // green/lime
-  storage:  { ground:'#3a3a52', accent:'#c9c2ff', sky:'#bcb8ff' },   // violet
-  database: { ground:'#3d2f23', accent:'#ffc99a', sky:'#ffd9a6' },   // warm
-  network:  { ground:'#1f3a4d', accent:'#7ad9ff', sky:'#9ee0ff' },   // teal
+  compute:  { ground:'#5fa83c', accent:'#b6f57a', sky:'#a4d8ff' },   // vivid green/lime
+  storage:  { ground:'#7a5fd0', accent:'#d7c8ff', sky:'#bcb8ff' },   // vivid violet
+  database: { ground:'#d08a3a', accent:'#ffd9a0', sky:'#ffd9a6' },   // warm amber
+  network:  { ground:'#2f8fc4', accent:'#8be4ff', sky:'#9ee0ff' },   // bright teal
 };
 const ORANGE = 0xff9900;
+const ORANGE_HEX = '#ff9900';
+// '#rrggbb' + alpha → 'rgba(...)' for canvas fills
+function hexA(hex, a){
+  const n = parseInt(String(hex).replace('#',''),16);
+  return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;
+}
 
 // Body / outfit options
 const SKINS    = ['#f8d2b1','#e8b08a','#c98c63','#9c6b46','#7b4a2d','#4a2e1d'];
@@ -559,7 +565,7 @@ let stickVec = {x:0,y:0};
 let sprint = false;
 
 // Time of day — gameTime is hours [0..24). 6:00 = dawn, 12:00 = noon, 18:00 = dusk, 0:00 = midnight.
-let gameTime = 6.5;
+let gameTime = 13.5;   // start in bright afternoon so the city reads vivid on load
 let timeSpeed = 1.0;       // 0.25x .. 8x — adjusts how fast the day advances
 
 // Camera follow
@@ -851,8 +857,10 @@ function initWorld(){
   renderer.shadowMap.type = THREE_R.PCFSoftShadowMap;
   // nicer color/lighting pipeline: filmic tone mapping + sRGB output
   renderer.outputEncoding = THREE_R.sRGBEncoding;
-  renderer.toneMapping = THREE_R.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  // Cineon keeps colors more saturated/vivid than ACES while still taming highlights;
+  // a higher exposure makes the city read bright and punchy.
+  renderer.toneMapping = THREE_R.CineonToneMapping;
+  renderer.toneMappingExposure = 1.25;
   document.body.appendChild(renderer.domElement);
   window.addEventListener('resize', onResize);
 
@@ -900,7 +908,7 @@ function initWorld(){
 
   // ground (bottom layer — everything else is a decal pulled forward via polygonOffset)
   const groundGeo = new THREE_R.PlaneGeometry(1600, 1600, 1,1);
-  const groundMat = new THREE_R.MeshStandardMaterial({color:0x394a35, roughness:1, metalness:0});
+  const groundMat = new THREE_R.MeshStandardMaterial({color:0x53803f, roughness:1, metalness:0});
   ground = new THREE_R.Mesh(groundGeo, groundMat);
   ground.rotation.x = -Math.PI/2;
   ground.receiveShadow = true;
@@ -1001,9 +1009,9 @@ const SKY_KF = [
   [ 0.0, 0x05081a, 0x0a1430, 0x07091a ], // deep night
   [ 5.0, 0x1a2548, 0x3a2a55, 0x1a1a2e ], // pre-dawn
   [ 6.0, 0x4d6b9c, 0xff9a76, 0x6a4a55 ], // dawn (sunrise)
-  [ 7.5, 0x6db4e0, 0xffdca0, 0x9ec5e0 ], // morning
-  [12.0, 0x4a9fd0, 0xb8e0f5, 0x88c2f0 ], // noon
-  [16.5, 0x6db4e0, 0xffdca0, 0xa7c6df ], // afternoon
+  [ 7.5, 0x4f9fe6, 0xdff0ff, 0xaed8f2 ], // morning
+  [12.0, 0x1f8fe0, 0xa9e2ff, 0x7ec3f0 ], // noon — vivid sky blue
+  [16.5, 0x3f9fe6, 0xd6ecff, 0xa7d2ef ], // afternoon
   [18.0, 0x4f5a8a, 0xff7733, 0x8a4a55 ], // dusk (sunset)
   [19.5, 0x1a2a55, 0x55336a, 0x2a2848 ], // post-sunset
   [21.5, 0x080b22, 0x141c3a, 0x09102a ], // night
@@ -2375,7 +2383,7 @@ function updatePlayer(dt){
     move.addScaledVector(right, mx * 0.85);   // lateral a touch slower than forward
     const onVehicle = !!player.vehicle;
     // a bit calmer than before so it doesn't feel twitchy
-    let speed = onVehicle ? 24 : (sprint ? 9 : 5.2);
+    let speed = onVehicle ? 32 : (sprint ? 14 : 8.5);
     if(move.length() > 1) move.normalize();
     move.multiplyScalar(speed*dt);
     playerMesh.position.add(move);
@@ -2491,10 +2499,10 @@ function updateWorld(dt){
     ml.position.set(-sunDir.x, -sunDir.y, -sunDir.z).multiplyScalar(300).add(camera.position);
   }
   if(scene.userData.hemi){
-    scene.userData.hemi.intensity = 0.25 + day * 0.55;
+    scene.userData.hemi.intensity = 0.38 + day * 0.62;
   }
   if(scene.userData.ambient){
-    scene.userData.ambient.intensity = 0.25 + day * 0.5;
+    scene.userData.ambient.intensity = 0.34 + day * 0.55;
   }
 
   // Stars (fade in at night)
@@ -4049,35 +4057,89 @@ function openMap(){
   const c = document.getElementById('fullMap');
   const ctx = c.getContext('2d');
   const W = c.width, H = c.height;
-  ctx.clearRect(0,0,W,H);
-  ctx.fillStyle = '#0b1320'; ctx.fillRect(0,0,W,H);
   const scale = W/1200;
   const cx = W/2, cy = H/2;
-  Object.entries(DISTRICTS).forEach(([id, d])=>{
-    ctx.fillStyle = d.color.ground;
-    ctx.fillRect(cx + d.center[0]*scale - 110*scale, cy + d.center[2]*scale - 110*scale, 220*scale, 220*scale);
-    ctx.fillStyle = d.color.accent;
-    ctx.font = 'bold 18px Segoe UI';
-    ctx.fillText(d.name, cx + d.center[0]*scale - 90*scale, cy + d.center[2]*scale - 90*scale);
-  });
-  ctx.strokeStyle = '#666'; ctx.lineWidth = 6;
-  ctx.beginPath(); ctx.moveTo(cx,0); ctx.lineTo(cx,H); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(0,cy); ctx.lineTo(W,cy); ctx.stroke();
+  const rr = (x,y,w,h,r)=>{ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); };
 
-  // clickable landmarks
+  // ---- background: deep radial gradient + faint grid ----
+  const bg = ctx.createRadialGradient(cx,cy,60, cx,cy,W*0.72);
+  bg.addColorStop(0,'#13203b'); bg.addColorStop(1,'#070b16');
+  ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle = 'rgba(122,180,255,0.07)'; ctx.lineWidth = 1;
+  for(let g=0; g<=W; g+=W/12){ ctx.beginPath(); ctx.moveTo(g,0); ctx.lineTo(g,H); ctx.stroke(); ctx.beginPath(); ctx.moveTo(0,g); ctx.lineTo(W,g); ctx.stroke(); }
+
+  // ---- streets (under tiles) ----
+  ctx.strokeStyle = 'rgba(180,200,230,0.18)'; ctx.lineWidth = 16; ctx.lineCap='round';
+  ctx.beginPath(); ctx.moveTo(cx,40); ctx.lineTo(cx,H-40); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(40,cy); ctx.lineTo(W-40,cy); ctx.stroke();
+  ctx.strokeStyle = 'rgba(255,233,168,0.5)'; ctx.lineWidth = 2; ctx.setLineDash([10,12]);
+  ctx.beginPath(); ctx.moveTo(cx,40); ctx.lineTo(cx,H-40); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(40,cy); ctx.lineTo(W-40,cy); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // ---- district tiles (rounded, accent-colored) ----
+  Object.entries(DISTRICTS).forEach(([id, d])=>{
+    const tx = cx + d.center[0]*scale - 110*scale;
+    const ty = cy + d.center[2]*scale - 110*scale;
+    const ts = 220*scale;
+    rr(tx,ty,ts,ts,16);
+    ctx.fillStyle = hexA(d.color.accent, 0.16); ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = hexA(d.color.accent, 0.85); ctx.stroke();
+    // label chip
+    ctx.font = 'bold 16px Segoe UI';
+    const tw = ctx.measureText(d.name).width;
+    rr(tx+10, ty+10, tw+18, 26, 8); ctx.fillStyle='rgba(7,11,22,0.7)'; ctx.fill();
+    ctx.fillStyle = d.color.accent; ctx.textBaseline='middle'; ctx.textAlign='left';
+    ctx.fillText(d.name, tx+19, ty+24);
+  });
+
+  // ---- downtown plaza hub ----
+  ctx.beginPath(); ctx.arc(cx,cy,60*scale,0,Math.PI*2);
+  ctx.fillStyle='rgba(255,153,0,0.10)'; ctx.fill();
+  ctx.lineWidth=2; ctx.strokeStyle='rgba(255,153,0,0.6)'; ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx,cy,5,0,Math.PI*2); ctx.fillStyle=ORANGE_HEX; ctx.fill();
+  ctx.font='bold 12px Segoe UI'; ctx.fillStyle='#ffce8a'; ctx.textAlign='center';
+  ctx.fillText('DOWNTOWN', cx, cy+60*scale+14);
+
+  // ---- landmark pins (clickable) ----
   const hits = [];
+  ctx.textAlign='left'; ctx.textBaseline='middle';
   LANDMARKS.forEach(b=>{
     const x = cx + b.pos[0]*scale;
     const y = cy + b.pos[2]*scale;
-    ctx.fillStyle = player.badges.has(b.id) ? '#5cdb95' : '#ff9900';
-    ctx.beginPath(); ctx.arc(x,y,9,0,Math.PI*2); ctx.fill();
-    ctx.fillStyle = '#fff'; ctx.font = '12px Segoe UI';
-    ctx.fillText(b.name, x+12, y+4);
+    const visited = player.badges.has(b.id);
+    const solved = player.handsonSolved.has(b.id);
+    const col = solved ? '#5cdb95' : (visited ? '#7ad9ff' : '#ff9900');
+    // glow
+    ctx.beginPath(); ctx.arc(x,y,12,0,Math.PI*2); ctx.fillStyle = hexA(col,0.22); ctx.fill();
+    // pin
+    ctx.beginPath(); ctx.arc(x,y,7,0,Math.PI*2); ctx.fillStyle = col; ctx.fill();
+    ctx.lineWidth=2; ctx.strokeStyle='rgba(255,255,255,0.85)'; ctx.stroke();
+    if(solved){ ctx.fillStyle='#062013'; ctx.font='bold 9px Segoe UI'; ctx.textAlign='center'; ctx.fillText('✓',x,y+0.5); ctx.textAlign='left'; }
+    // label chip
+    ctx.font='11px Segoe UI';
+    const tw = ctx.measureText(b.name).width;
+    rr(x+11, y-9, tw+12, 18, 6); ctx.fillStyle='rgba(7,11,22,0.78)'; ctx.fill();
+    ctx.fillStyle='#eaf2ff'; ctx.fillText(b.name, x+17, y+0.5);
     hits.push({b, x, y});
   });
-  // player dot
-  ctx.fillStyle = '#fff';
-  ctx.beginPath(); ctx.arc(cx + playerMesh.position.x*scale, cy + playerMesh.position.z*scale, 6, 0, Math.PI*2); ctx.fill();
+
+  // ---- player marker: heading arrow ----
+  const px = cx + playerMesh.position.x*scale;
+  const py = cy + playerMesh.position.z*scale;
+  const yaw = playerMesh.rotation.y;
+  ctx.save(); ctx.translate(px,py); ctx.rotate(-yaw);
+  ctx.beginPath(); ctx.arc(0,0,11,0,Math.PI*2); ctx.fillStyle='rgba(255,255,255,0.18)'; ctx.fill();
+  ctx.beginPath(); ctx.moveTo(0,-10); ctx.lineTo(7,8); ctx.lineTo(0,4); ctx.lineTo(-7,8); ctx.closePath();
+  ctx.fillStyle='#ffffff'; ctx.fill(); ctx.lineWidth=1.5; ctx.strokeStyle=ORANGE_HEX; ctx.stroke();
+  ctx.restore();
+
+  // ---- legend ----
+  ctx.textAlign='left'; ctx.font='12px Segoe UI';
+  const leg=[['#ff9900','Unvisited'],['#7ad9ff','Visited'],['#5cdb95','Lab solved'],['#ffffff','You']];
+  rr(14, H-14-leg.length*20-8, 150, leg.length*20+12, 10); ctx.fillStyle='rgba(7,11,22,0.8)'; ctx.fill();
+  leg.forEach(([cc,txt],i)=>{ const ly=H-14-leg.length*20+i*20; ctx.beginPath(); ctx.arc(28,ly,5,0,Math.PI*2); ctx.fillStyle=cc; ctx.fill(); ctx.fillStyle='#cfe0f5'; ctx.fillText(txt,40,ly+0.5); });
+  ctx.textBaseline='alphabetic';
 
   // Replace any prior handler so opening the map repeatedly does not accumulate listeners.
   // FORGIVING fast travel: click anywhere — we jump to the NEAREST landmark to the click
