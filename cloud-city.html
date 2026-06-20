@@ -31,39 +31,62 @@
   .tag{display:inline-block;padding:2px 8px;border-radius:999px;background:var(--orange);color:var(--ink);font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
 
   /* ---------- character creator ---------- */
-  #creator{inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 20%, #1b2a4e 0%, #07091a 70%);z-index:50}
+  #creator{inset:0;display:flex;align-items:center;justify-content:center;padding:18px;
+    background:radial-gradient(1200px 700px at 28% 12%, #25406f 0%, #101a36 42%, #06091a 100%);z-index:50}
+  #creator::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(0deg,transparent 0 2px,rgba(0,0,0,.18) 3px 4px);opacity:.25;mix-blend-mode:multiply}
   #creator.hidden{display:none}
-  .creator-card{width:min(960px,94vw);max-height:94vh;overflow:auto;padding:28px 32px;border-radius:18px;background:var(--panel);border:2px solid var(--border)}
-  .creator-card h1{font-size:34px;color:var(--orange)}
-  .creator-card .sub{opacity:.8;margin:6px 0 22px;font-size:14px}
-  .creator-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:24px}
-  @media (max-width:780px){.creator-grid{grid-template-columns:1fr}}
-  .preview{
-    aspect-ratio:1/1.1;border-radius:14px;background:linear-gradient(180deg,#243a66 0%,#0d1736 100%);
-    position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.1)
-  }
+  .creator-card{position:relative;width:min(1060px,96vw);max-height:94vh;overflow:auto;padding:0;border-radius:20px;
+    background:linear-gradient(180deg,rgba(16,24,44,.96),rgba(9,13,26,.97));border:1px solid rgba(255,153,0,.45);
+    box-shadow:0 30px 90px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.04)}
+  .creator-head{padding:22px 30px 16px;border-bottom:1px solid rgba(255,255,255,.08);
+    background:linear-gradient(180deg,rgba(255,153,0,.10),transparent)}
+  .cc-tag{display:inline-block;font-family:ui-monospace,Consolas,monospace;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--orange);border:1px solid rgba(255,153,0,.5);border-radius:5px;padding:4px 10px;background:rgba(255,153,0,.08)}
+  .creator-card h1{font-size:clamp(30px,5vw,44px);color:#fff;margin-top:10px;letter-spacing:1px;
+    text-shadow:0 0 26px rgba(255,153,0,.35)}
+  .creator-card h1 span{color:var(--orange)}
+  .creator-card .sub{opacity:.82;margin:6px 0 0;font-size:13.5px;max-width:620px}
+  .creator-grid{display:grid;grid-template-columns:0.82fr 1.18fr;gap:26px;padding:22px 30px 26px}
+  @media (max-width:820px){.creator-grid{grid-template-columns:1fr}}
+  .preview-wrap{display:flex;flex-direction:column;gap:12px;position:sticky;top:0;align-self:start}
+  .preview{aspect-ratio:1/1.18;border-radius:16px;position:relative;overflow:hidden;
+    background:radial-gradient(120% 80% at 50% 18%,#33508a 0%,#1a2747 45%,#0a1226 100%);
+    border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 -40px 60px rgba(0,0,0,.4)}
+  .preview::after{content:"PREVIEW";position:absolute;left:12px;top:11px;font-family:ui-monospace,Consolas,monospace;
+    font-size:10px;letter-spacing:.2em;color:rgba(255,255,255,.55)}
   .preview canvas{position:absolute;inset:0}
-  .row{margin-bottom:14px}
-  .row label{display:block;font-size:12px;text-transform:uppercase;letter-spacing:1px;opacity:.75;margin-bottom:6px}
-  .swatches{display:flex;flex-wrap:wrap;gap:6px}
-  .swatch{width:28px;height:28px;border-radius:8px;border:2px solid transparent;cursor:pointer;transition:transform .1s}
-  .swatch:hover{transform:scale(1.08)}
+  .controls{min-width:0}
+  .cgroup{margin-bottom:16px;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08)}
+  .cgroup h3{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:12px;font-weight:800}
+  .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px}
+  @media (max-width:520px){.cgrid{grid-template-columns:1fr}}
+  .row{margin:0}
+  .row label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.8px;opacity:.7;margin-bottom:7px}
+  .swatches{display:flex;flex-wrap:wrap;gap:7px}
+  .swatch{width:30px;height:30px;border-radius:9px;border:2px solid rgba(255,255,255,.14);cursor:pointer;transition:transform .1s,box-shadow .15s}
+  .swatch:hover{transform:scale(1.1)}
   .swatch:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
-  .swatch.active{border-color:#fff;box-shadow:0 0 0 2px var(--orange)}
+  .swatch.active{border-color:#fff;box-shadow:0 0 0 3px var(--orange),0 0 12px rgba(255,153,0,.5)}
   .pill-row{display:flex;flex-wrap:wrap;gap:6px}
-  .pill{padding:6px 12px;border-radius:999px;background:var(--panel-light);border:1px solid rgba(255,255,255,.12);font-size:12px;color:#fff;cursor:pointer}
-  .pill:hover{background:rgba(255,255,255,.16)}
+  .pill{padding:7px 13px;border-radius:999px;background:var(--panel-light);border:1px solid rgba(255,255,255,.14);font-size:12px;color:#fff;cursor:pointer;transition:.12s}
+  .pill:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.3)}
   .pill:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
-  .pill.active{background:var(--orange);color:var(--ink);border-color:var(--orange);font-weight:700}
-  .role-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-  .role{padding:10px;border-radius:10px;background:var(--panel-light);border:1px solid rgba(255,255,255,.12);cursor:pointer;text-align:center;transition:background .15s}
-  .role:hover{background:rgba(255,255,255,.16)}
+  .pill.active{background:var(--orange);color:var(--ink);border-color:var(--orange);font-weight:700;box-shadow:0 2px 10px rgba(255,153,0,.4)}
+  .role-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  @media (max-width:520px){.role-row{grid-template-columns:repeat(2,1fr)}}
+  .role{padding:13px 8px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);cursor:pointer;text-align:center;transition:.15s}
+  .role:hover{background:rgba(255,255,255,.1);border-color:rgba(255,153,0,.5);transform:translateY(-2px)}
   .role:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
-  .role.active{background:var(--orange);color:var(--ink);border-color:var(--orange);font-weight:700}
-  .role .ricon{font-size:22px;margin-bottom:4px}
-  .name-input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.3);color:#fff;font-size:15px;font-family:inherit}
-  .start-btn{margin-top:14px;width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(180deg,var(--orange),var(--orange-deep));color:var(--ink);font-size:16px;font-weight:800;letter-spacing:.5px;cursor:pointer;box-shadow:0 6px 20px rgba(255,153,0,.45)}
-  .start-btn:hover{filter:brightness(1.06)}
+  .role.active{background:linear-gradient(180deg,rgba(255,153,0,.9),rgba(236,114,17,.9));color:var(--ink);border-color:var(--orange);box-shadow:0 6px 18px rgba(255,153,0,.4)}
+  .role.active .small{color:#3a2400 !important;opacity:.9}
+  .role .ricon{font-size:24px;margin-bottom:5px}
+  .role > div:nth-child(2){font-weight:700;font-size:13px}
+  .name-input{width:100%;padding:12px 14px;border-radius:11px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.35);color:#fff;font-size:15px;font-family:inherit;text-align:center}
+  .name-input:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 2px rgba(255,153,0,.3)}
+  .start-btn{margin-top:6px;width:100%;padding:15px;border-radius:13px;border:none;background:linear-gradient(180deg,var(--orange),var(--orange-deep));color:var(--ink);font-size:16px;font-weight:800;letter-spacing:.5px;cursor:pointer;box-shadow:0 8px 24px rgba(255,153,0,.45)}
+  .start-btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+  .start-btn:active{transform:translateY(1px)}
 
   /* ---------- HUD ---------- */
   #hud{position:absolute;inset:0;pointer-events:none;z-index:10}
@@ -83,23 +106,50 @@
   #miniMap canvas{width:100%;height:100%;display:block}
 
   #hint{
-    bottom:18px;left:50%;transform:translateX(-50%);padding:10px 18px;border-radius:12px;font-size:14px;opacity:0;transition:opacity .2s;background:rgba(0,0,0,.7);border:1px solid var(--border);max-width:80vw;text-align:center
+    position:absolute;bottom:24px;left:50%;transform:translateX(-50%);padding:10px 18px;border-radius:12px;font-size:14px;opacity:0;transition:opacity .2s;background:rgba(0,0,0,.78);border:1px solid var(--border);max-width:80vw;text-align:center;white-space:nowrap;z-index:12
   }
   #hint.show{opacity:1}
   #hint b{color:var(--orange)}
 
   #toast{
-    top:14px;left:14px;padding:10px 16px;font-size:13px;border-radius:12px;opacity:0;transform:translateY(-6px);transition:all .25s;max-width:340px
+    position:fixed;top:16px;left:16px;z-index:80;padding:12px 18px;font-size:14px;line-height:1.4;border-radius:13px;
+    opacity:0;transform:translateY(-8px);transition:opacity .22s,transform .22s;min-width:240px;max-width:min(420px,80vw);
+    background:rgba(11,19,32,0.96);border:2px solid var(--border);box-shadow:0 14px 44px rgba(0,0,0,.6);pointer-events:none;display:none
   }
-  #toast.show{opacity:1;transform:translateY(0)}
-  #toast .ttl{font-weight:800;color:var(--orange);margin-bottom:2px;font-size:11px;letter-spacing:1px;text-transform:uppercase}
+  #toast.show{opacity:1;transform:translateY(0);display:block}
+  #toast .ttl{font-weight:800;color:var(--orange);margin-bottom:3px;font-size:11px;letter-spacing:1.2px;text-transform:uppercase}
+  #toast #toastBody{color:#eaf2ff}
+
+  /* mute button */
+  #muteBtn{position:fixed;top:16px;right:16px;z-index:80;width:46px;height:46px;border-radius:12px;border:2px solid var(--border);
+    background:rgba(11,19,32,0.9);color:#fff;font-size:20px;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.5);transition:transform .1s,filter .15s}
+  #muteBtn:hover{filter:brightness(1.15)} #muteBtn:active{transform:scale(.93)}
+  #muteBtn.muted{opacity:.6;border-color:rgba(255,255,255,.25)}
+  @media (max-width:780px){#muteBtn{top:auto;bottom:200px;right:16px}}
+
+  /* crash / accident effect */
+  #crashFx{position:fixed;inset:0;z-index:75;pointer-events:none;display:none;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 50% 50%, rgba(255,40,40,0) 30%, rgba(180,0,0,0.55) 100%)}
+  #crashFx.show{display:flex;animation:crashflash .5s ease-out}
+  @keyframes crashflash{0%{background:rgba(255,255,255,.85)}30%{background:rgba(255,40,40,.55)}100%{background:rgba(120,0,0,0)}}
+  #crashFxText{font-family:'Segoe UI',sans-serif;font-weight:900;font-size:clamp(40px,11vw,120px);color:#fff;letter-spacing:4px;
+    text-shadow:0 0 30px rgba(255,40,40,.9),0 6px 0 #7a0000;transform:rotate(-6deg);animation:crashpop .6s cubic-bezier(.2,1.4,.4,1)}
+  @keyframes crashpop{0%{transform:rotate(-6deg) scale(.3);opacity:0}40%{transform:rotate(-6deg) scale(1.15);opacity:1}100%{transform:rotate(-6deg) scale(1);opacity:1}}
+  .shake-cam{animation:shakecam .5s cubic-bezier(.36,.07,.19,.97)}
+  @keyframes shakecam{10%{transform:translate(-7px,4px)}20%{transform:translate(8px,-5px)}30%{transform:translate(-9px,3px)}40%{transform:translate(7px,5px)}50%{transform:translate(-6px,-4px)}60%{transform:translate(7px,3px)}70%{transform:translate(-5px,4px)}80%{transform:translate(4px,-3px)}100%{transform:none}}
 
   #controls{
-    bottom:14px;left:14px;padding:10px 14px;font-size:11px;letter-spacing:.5px;opacity:.85;line-height:1.7
+    bottom:14px;left:14px;padding:10px 14px;font-size:11px;letter-spacing:.5px;opacity:.92;line-height:1.7
   }
-  #controls kbd{
+  #controls.hidden{display:none}
+  #controls .ctrl-ttl{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--orange);margin-bottom:5px;opacity:.9}
+  #controls kbd, #ctrlHint kbd{
     display:inline-block;padding:1px 6px;border-radius:5px;background:#222;border:1px solid rgba(255,255,255,.2);font-family:inherit;font-size:11px;color:#fff;margin:0 2px
   }
+  /* tiny always-on hint chip (hidden whenever the full panel is shown) */
+  #ctrlHint{bottom:14px;left:14px;padding:6px 11px;font-size:11px;opacity:.7;letter-spacing:.5px}
+  #ctrlHint.hidden{display:none}
+  @media (pointer:coarse){#ctrlHint{display:none}}
 
   #mission{
     top:14px;right:14px;width:280px;padding:12px 14px;font-size:13px;display:none
@@ -183,9 +233,21 @@
   @keyframes curblink{50%{opacity:0}}
   .hands-term .ok{color:var(--good)} .hands-term .warn{color:var(--orange)} .hands-term .bad{color:var(--bad)} .hands-term .sys{color:#7ad9ff} .hands-term .dim{color:#6f86ad} .hands-term .json{color:#cfe0f5}
 
-  /* full map */
-  #mapOverlay .sheet{width:min(820px,94vw)}
-  #fullMap{width:100%;aspect-ratio:1/1;border-radius:14px;background:#050912;border:1px solid rgba(255,255,255,.08)}
+  /* full map — near FULL-PAGE fixed panel: big square map + side list */
+  #mapOverlay{background:rgba(4,7,14,0.97);backdrop-filter:blur(2px)}
+  .map-sheet{position:fixed;left:1.2vw;right:1.2vw;top:1.6vh;bottom:1.6vh;width:auto;max-width:none;max-height:none;overflow:hidden;padding:14px 20px;display:flex;flex-direction:column}
+  .map-layout{display:flex;gap:18px;flex:1;min-height:0;justify-content:center;align-items:center;margin-top:8px}
+  /* the map is a square: as big as fits the panel height AND leaves room for the side list */
+  #fullMap{position:relative;inset:auto;height:min(calc(95vh - 150px), calc(96vw - 380px));width:min(calc(95vh - 150px), calc(96vw - 380px));flex:none;border-radius:14px;background:#070b16;border:1px solid rgba(255,255,255,.1);cursor:pointer}
+  .map-side{width:330px;flex:none;display:flex;flex-direction:column;min-height:0;max-height:min(calc(95vh - 150px), calc(96vw - 380px))}
+  .travel-list{margin-top:8px;flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding-right:6px}
+  .travel-list .bcard{cursor:pointer;padding:9px 12px}
+  .travel-list .bcard:hover{background:rgba(255,255,255,.14)}
+  @media (max-width:820px){
+    .map-layout{flex-direction:column;justify-content:flex-start;align-items:center}
+    #fullMap{height:auto;width:min(92vw,520px)}
+    .map-side{width:min(92vw,520px);flex:1}
+  }
 
   /* encyclopedia */
   .badge-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:10px}
@@ -245,49 +307,36 @@
 <!-- ========== CHARACTER CREATOR ========== -->
 <div id="creator">
   <div class="creator-card">
-    <h1>CLOUD CITY</h1>
-    <div class="sub">Customize your architect. Pick a starting role — it sets your outfit and where you spawn.</div>
+    <div class="creator-head">
+      <span class="cc-tag">Character Creator</span>
+      <h1>CLOUD <span>CITY</span></h1>
+      <div class="sub">Design your cloud architect. Your starting role sets your outfit and the district you spawn in.</div>
+    </div>
     <div class="creator-grid">
-      <div class="preview"><canvas id="previewCanvas"></canvas></div>
-      <div>
-        <div class="row">
-          <label>Architect name</label>
-          <input id="archName" class="name-input" maxlength="20" placeholder="e.g. Ada Cloudwell" />
+      <div class="preview-wrap">
+        <div class="preview"><canvas id="previewCanvas"></canvas></div>
+        <input id="archName" class="name-input" maxlength="20" placeholder="Name your architect" />
+      </div>
+      <div class="controls">
+        <div class="cgroup">
+          <h3>Appearance</h3>
+          <div class="cgrid">
+            <div class="row"><label>Skin tone</label><div class="swatches" id="skinSwatches"></div></div>
+            <div class="row"><label>Hairstyle</label><div class="pill-row" id="hairPills"></div></div>
+            <div class="row"><label>Hair color</label><div class="swatches" id="hairSwatches"></div></div>
+          </div>
         </div>
-        <div class="row">
-          <label>Body type</label>
-          <div class="pill-row" id="bodyPills"></div>
+        <div class="cgroup">
+          <h3>Outfit</h3>
+          <div class="cgrid">
+            <div class="row"><label>Jacket</label><div class="swatches" id="jacketSwatches"></div></div>
+            <div class="row"><label>Pants</label><div class="swatches" id="pantsSwatches"></div></div>
+            <div class="row"><label>Shoes</label><div class="swatches" id="shoeSwatches"></div></div>
+            <div class="row"><label>Accessory</label><div class="pill-row" id="accPills"></div></div>
+          </div>
         </div>
-        <div class="row">
-          <label>Skin tone</label>
-          <div class="swatches" id="skinSwatches"></div>
-        </div>
-        <div class="row">
-          <label>Hairstyle</label>
-          <div class="pill-row" id="hairPills"></div>
-        </div>
-        <div class="row">
-          <label>Hair color</label>
-          <div class="swatches" id="hairSwatches"></div>
-        </div>
-        <div class="row">
-          <label>Jacket color</label>
-          <div class="swatches" id="jacketSwatches"></div>
-        </div>
-        <div class="row">
-          <label>Pants color</label>
-          <div class="swatches" id="pantsSwatches"></div>
-        </div>
-        <div class="row">
-          <label>Shoes color</label>
-          <div class="swatches" id="shoeSwatches"></div>
-        </div>
-        <div class="row">
-          <label>Accessory</label>
-          <div class="pill-row" id="accPills"></div>
-        </div>
-        <div class="row">
-          <label>Starting role</label>
+        <div class="cgroup">
+          <h3>Starting role</h3>
           <div class="role-row" id="roles"></div>
         </div>
         <button class="start-btn" id="startBtn">Enter Cloud City →</button>
@@ -314,23 +363,33 @@
     <div id="missionTitle"></div>
     <div id="missionSteps"></div>
   </div>
-  <div id="toast" class="panel hud-panel"><div class="ttl" id="toastTtl"></div><div id="toastBody"></div></div>
   <div id="hint" class="hud-panel"></div>
   <div id="miniMap" class="panel hud-panel"><canvas id="miniMapCanvas" width="220" height="220"></canvas></div>
-  <div id="controls" class="panel hud-panel">
+  <div id="controls" class="panel hud-panel hidden">
+    <div class="ctrl-ttl"><kbd>I</kbd> hide controls</div>
     <div><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> move &nbsp; <kbd>Shift</kbd> sprint</div>
     <div><kbd>←</kbd><kbd>→</kbd> turn cam &nbsp; <kbd>↑</kbd><kbd>↓</kbd> tilt &nbsp; <kbd>,</kbd>/<kbd>.</kbd> zoom</div>
     <div><kbd>E</kbd> enter &nbsp; <kbd>V</kbd> vehicle &nbsp; <kbd>F</kbd> fast travel</div>
     <div><kbd>M</kbd> map &nbsp; <kbd>B</kbd> badges &nbsp; <kbd>O</kbd> outfit &nbsp; <kbd>J</kbd> gigs</div>
     <div><kbd>[</kbd>/<kbd>]</kbd> time speed &nbsp; <kbd>\</kbd> pause &nbsp; <kbd>T</kbd> skip 6h</div>
   </div>
+  <div id="ctrlHint" class="panel hud-panel"><kbd>I</kbd> controls</div>
 </div>
+
+<!-- toast lives OUTSIDE #hud so interaction notifications appear above building/map overlays -->
+<div id="toast" class="panel"><div class="ttl" id="toastTtl"></div><div id="toastBody"></div></div>
+
+<!-- mute / sound toggle (top-right corner) -->
+<button id="muteBtn" title="Mute / unmute (also: 0 key)">🔊</button>
 
 <div id="stick"><div class="nub" id="nub"></div></div>
 <div id="actionBtns">
   <button class="ab" id="btnEnter">E</button>
   <button class="ab" id="btnVehicle">V</button>
 </div>
+
+<!-- crash / accident flash overlay -->
+<div id="crashFx"><div id="crashFxText">CRASH!</div></div>
 
 <!-- ========== OVERLAYS ========== -->
 <div id="buildingOverlay" class="overlay">
@@ -349,13 +408,16 @@
 </div>
 
 <div id="mapOverlay" class="overlay">
-  <div class="sheet">
+  <div class="sheet map-sheet">
     <span class="tag">map</span>
     <h2>Cloud City</h2>
-    <div class="small">Click anywhere near a landmark on the map — or pick one from the list — to fast travel.</div>
-    <canvas id="fullMap" width="800" height="800"></canvas>
-    <div class="label">Fast travel to</div>
-    <div id="travelList" class="badge-grid"></div>
+    <div class="map-layout">
+      <canvas id="fullMap" width="1000" height="1000"></canvas>
+      <div class="map-side">
+        <div class="small">Click the map — or a place below — to fast-travel.</div>
+        <div id="travelList" class="travel-list"></div>
+      </div>
+    </div>
     <button class="close" id="mapClose">Close</button>
   </div>
 </div>
@@ -449,6 +511,90 @@ const player = {
   capstone:{ r53:false, vpc:false, ec2:false, s3:false, dynamo:false },
 };
 
+/* =====================================================================
+   AUDIO — all sound is SYNTHESIZED with the Web Audio API (no asset files),
+   so the game stays a single self-contained page. City hum + crowd murmur,
+   traffic horns, crash, and UI chimes. Mute toggles the master gain.
+   ===================================================================== */
+const AudioFX = {
+  ctx:null, master:null, noiseBuf:null, ready:false, muted:false,
+  hornTimer:5, murmurTimer:3,
+  init(){
+    if(this.ready) return;
+    try{
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if(!AC) return;
+      this.ctx = new AC();
+      this.master = this.ctx.createGain();
+      this.master.gain.value = this.muted ? 0 : 0.5;
+      this.master.connect(this.ctx.destination);
+      const len = Math.floor(this.ctx.sampleRate * 1.0);
+      this.noiseBuf = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
+      const d = this.noiseBuf.getChannelData(0);
+      for(let i=0;i<len;i++) d[i] = Math.random()*2-1;
+      // continuous low city hum
+      const src = this.ctx.createBufferSource(); src.buffer = this.noiseBuf; src.loop = true;
+      const lp = this.ctx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=170;
+      const g = this.ctx.createGain(); g.gain.value=0.06;
+      src.connect(lp).connect(g).connect(this.master); src.start();
+      this.ready = true;
+    }catch(e){}
+  },
+  resume(){ if(this.ctx && this.ctx.state==='suspended') this.ctx.resume(); },
+  setMuted(m){ this.muted=m; if(this.master) this.master.gain.setTargetAtTime(m?0:0.5, this.ctx.currentTime, 0.04); },
+  tone(freq, dur, type, vol, when){
+    if(!this.ready || this.muted) return;
+    const t = when || this.ctx.currentTime;
+    const o=this.ctx.createOscillator(); o.type=type||'sine'; o.frequency.value=freq;
+    const g=this.ctx.createGain();
+    g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(vol||0.2, t+0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t+dur);
+    o.connect(g).connect(this.master); o.start(t); o.stop(t+dur+0.03);
+  },
+  noise(dur, type, freq, vol){
+    if(!this.ready || this.muted) return;
+    const t=this.ctx.currentTime;
+    const s=this.ctx.createBufferSource(); s.buffer=this.noiseBuf;
+    const f=this.ctx.createBiquadFilter(); f.type=type||'bandpass'; f.frequency.value=freq||700;
+    const g=this.ctx.createGain(); g.gain.setValueAtTime(vol||0.2,t); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    s.connect(f).connect(g).connect(this.master); s.start(t); s.stop(t+dur+0.03);
+  },
+  horn(){
+    if(!this.ready || this.muted) return;
+    const t=this.ctx.currentTime, base=300+Math.random()*120;
+    [base, base*1.19].forEach(fr=>{
+      const o=this.ctx.createOscillator(); o.type='sawtooth'; o.frequency.value=fr;
+      const g=this.ctx.createGain();
+      g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(0.16,t+0.03);
+      g.gain.setValueAtTime(0.16,t+0.30); g.gain.exponentialRampToValueAtTime(0.0001,t+0.45);
+      const lp=this.ctx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=1700;
+      o.connect(g).connect(lp).connect(this.master); o.start(t); o.stop(t+0.5);
+    });
+  },
+  crash(){
+    if(!this.ready || this.muted) return;
+    const t=this.ctx.currentTime;
+    const s=this.ctx.createBufferSource(); s.buffer=this.noiseBuf;
+    const bp=this.ctx.createBiquadFilter(); bp.type='lowpass';
+    bp.frequency.setValueAtTime(3200,t); bp.frequency.exponentialRampToValueAtTime(200,t+0.4);
+    const g=this.ctx.createGain(); g.gain.setValueAtTime(0.55,t); g.gain.exponentialRampToValueAtTime(0.0001,t+0.5);
+    s.connect(bp).connect(g).connect(this.master); s.start(t); s.stop(t+0.5);
+    const o=this.ctx.createOscillator(); o.type='sine';
+    o.frequency.setValueAtTime(130,t); o.frequency.exponentialRampToValueAtTime(40,t+0.3);
+    const g2=this.ctx.createGain(); g2.gain.setValueAtTime(0.5,t); g2.gain.exponentialRampToValueAtTime(0.0001,t+0.35);
+    o.connect(g2).connect(this.master); o.start(t); o.stop(t+0.4);
+  },
+  chime(){ if(!this.ready) return; const b=this.ctx.currentTime; [523,659,784].forEach((f,i)=>this.tone(f,0.18,'sine',0.15,b+i*0.08)); },
+  success(){ if(!this.ready) return; const b=this.ctx.currentTime; [523,659,784,1047].forEach((f,i)=>this.tone(f,0.22,'triangle',0.15,b+i*0.09)); },
+  click(){ this.tone(660,0.06,'square',0.1); },
+  murmur(){ this.noise(0.5+Math.random()*0.4,'bandpass',300+Math.random()*450,0.05); },
+  update(dt, nearPlaza){
+    if(!this.ready || this.muted) return;
+    this.hornTimer -= dt;   if(this.hornTimer<=0){ this.hornTimer = 4+Math.random()*7; this.horn(); }
+    this.murmurTimer -= dt; if(this.murmurTimer<=0){ this.murmurTimer = 2+Math.random()*3; if(nearPlaza) this.murmur(); }
+  }
+};
+
 // ---------- World layout ----------
 // Four districts arranged around a central plaza. Each holds named landmarks.
 // Coordinates are world meters. The map is roughly 600 x 600.
@@ -491,6 +637,15 @@ const LANDMARKS = [
     plaque:'Route 53 — DNS for AWS. Translates names like example.com into the right destination.' },
   { id:'cf',      district:'network',  name:'CloudFront Kiosks',   pos:[280, 0, 180], kind:'cf',
     plaque:'CloudFront — caches content at edge locations near users so pages load faster.' },
+];
+
+// Special non-service locations (kept SEPARATE from LANDMARKS so they don't affect
+// badges/capstone/gigs). They appear on the map and can be viewed, but aren't enterable yet.
+const PLACES = [
+  { id:'investigation', name:'Cloud Investigation', pos:[-380, 0, 80],  kind:'investigation', tag:'Coming soon',
+    msg:'CLOUD INVESTIGATION — Coming soon. This plot is reserved; the experience will be built here later.' },
+  { id:'zanardi',       name:'Zanardi Project',     pos:[ 380, 0, -80], kind:'zanardi',       tag:'Under construction',
+    msg:'ZANARDI PROJECT — Under construction. Crews are building it right now. Viewing only — you can\'t go in yet.' },
 ];
 
 // Side gigs — optional missions. NPCs stand ~22m BESIDE their target building
@@ -552,11 +707,18 @@ let fountainGroup, hologramGroup;
 let parkedCarsGroup;
 let trafficGroup;   // cars that drive along the streets
 let trafficCars = [];
+let obstacles = [];  // solid collision circles {x,z,r} the player cannot walk through
+let placesRoot;      // special locations (Cloud Investigation, Zanardi Project)
+let zanardiCranes = [], zanardiExcArms = [];  // animated construction parts
 let cameraYaw = 0;         // smoothed yaw (azimuth) for camera follow + input basis
 let camPitch = 0.34;       // camera elevation (radians) — arrow Up/Down
 let camDist  = 18;         // orbit distance from player
 let camManualT = 0;        // seconds left of hand-steered camera (suspends auto-trail)
 let playerMoving = false;  // set each frame in updatePlayer
+let crashing = false;      // true during an accident sequence
+let crashTimer = 0;        // seconds left before respawn
+let crashCooldown = 0;     // brief grace after respawn so we don't instantly re-crash
+const lastSafePos = new THREE_R.Vector3(0,0,0);  // last position clear of vehicles → respawn point
 let isMobile = matchMedia('(pointer:coarse)').matches;
 
 // Input
@@ -596,7 +758,6 @@ function buildCharacterCreator(){
   fillSwatches('jacketSwatches', JACKETS, i => { player.jacket = i; refreshCreator(); });
   fillSwatches('pantsSwatches', PANTS, i => { player.pants = i; refreshCreator(); });
   fillSwatches('shoeSwatches', SHOES, i => { player.shoes = i; refreshCreator(); });
-  fillPills('bodyPills', BODIES, i => { player.body = i; refreshCreator(); });
   fillPills('hairPills', HAIRSTYLES, i => { player.hair = i; refreshCreator(); });
   fillPills('accPills', ACCS, i => { player.acc = i; refreshCreator(); });
 
@@ -686,7 +847,6 @@ function refreshCreator(){
   document.querySelectorAll('#jacketSwatches .swatch').forEach((el,i)=>el.classList.toggle('active', i===player.jacket));
   document.querySelectorAll('#pantsSwatches .swatch').forEach((el,i)=>el.classList.toggle('active', i===player.pants));
   document.querySelectorAll('#shoeSwatches .swatch').forEach((el,i)=>el.classList.toggle('active', i===player.shoes));
-  document.querySelectorAll('#bodyPills .pill').forEach((el,i)=>el.classList.toggle('active', i===player.body));
   document.querySelectorAll('#hairPills .pill').forEach((el,i)=>el.classList.toggle('active', i===player.hair));
   document.querySelectorAll('#accPills .pill').forEach((el,i)=>el.classList.toggle('active', i===player.acc));
   document.querySelectorAll('#roles .role').forEach((el,i)=>el.classList.toggle('active', ROLES[i].id===player.role));
@@ -839,9 +999,13 @@ function beginGame(){
     playerMesh.position.z - Math.cos(cameraYaw)*followBack
   );
   camera.lookAt(playerMesh.position.x, 2.2, playerMesh.position.z);
+  lastSafePos.copy(playerMesh.position);
+
+  // audio starts on this user gesture (browser autoplay policy)
+  AudioFX.init(); AudioFX.resume();
 
   // reveal starting district badges intro
-  showToast('Welcome, ' + player.name, 'You spawned in the ' + startD.name + '. Walk near a landmark and press E to enter.');
+  showToast('Welcome, ' + player.name, 'You spawned in the ' + startD.name + '. Walk near a landmark and press E to enter. Press I anytime for controls.');
   setTimeout(()=>animate(), 50);
 }
 
@@ -875,6 +1039,7 @@ function initWorld(){
   ambientNpcGroup = new THREE_R.Group();
   trafficGroup = new THREE_R.Group();
   trafficCars = [];
+  obstacles = [];
   scene.add(bannerGroup, parkedCarsGroup, ambientNpcGroup, trafficGroup);
 
   // sky + celestial bodies + stars
@@ -953,6 +1118,7 @@ function initWorld(){
   obelisk.position.set(0,15,0);
   obelisk.castShadow = true;
   scene.add(obelisk);
+  obstacles.push({x:0, z:0, r:3.4});   // obelisk base is solid
   const obeliskTop = new THREE_R.Mesh(
     new THREE_R.OctahedronGeometry(3),
     new THREE_R.MeshStandardMaterial({color:0xffffff, emissive:ORANGE, emissiveIntensity:0.9})
@@ -968,6 +1134,14 @@ function initWorld(){
   buildingsRoot = new THREE_R.Group();
   scene.add(buildingsRoot);
   LANDMARKS.forEach(b=>buildLandmark(b));
+  // landmark collision — radius small enough that you can still step within E range (13u)
+  LANDMARKS.forEach(b=>obstacles.push({x:b.pos[0], z:b.pos[2], r:8, landmark:true}));
+
+  // special places (Cloud Investigation, Zanardi Project) — separate from service landmarks
+  placesRoot = new THREE_R.Group();
+  scene.add(placesRoot);
+  PLACES.forEach(p=>buildPlace(p));
+  PLACES.forEach(p=>obstacles.push({x:p.pos[0], z:p.pos[2], r: p.kind==='zanardi'?21:15}));   // fenced sites are solid
 
   // ambient decor (trees / lamps / clouds)
   decorateCity();
@@ -1351,6 +1525,9 @@ function scatterBuildings(){
     for(const lm of LANDMARKS){
       if(Math.hypot(lm.pos[0]-x, lm.pos[2]-z) < SAFE_LANDMARK+footprint/2) return false;
     }
+    for(const pl of PLACES){   // keep filler buildings off the special sites
+      if(Math.hypot(pl.pos[0]-x, pl.pos[2]-z) < 30 + footprint/2) return false;
+    }
     return true;
   }
   function districtTintFor(x,z){
@@ -1416,6 +1593,9 @@ function scatterBuildings(){
       cap.scale.set(fpW*0.5, 1.2, fpD*0.5);
       fillerRoot.add(cap);
 
+      // solid: can't walk through filler buildings
+      obstacles.push({x, z, r:Math.max(fpW,fpD)*0.5 + 0.6});
+
       built++;
     }
   }
@@ -1479,31 +1659,31 @@ function buildStreetFurniture(){
     if(Math.random()<0.45) trashCan(18, p);
   }
 
-  // four AWS billboards around the plaza
-  function billboard(x,z,rot,text,sub){
-    const g = new THREE_R.Group(); g.position.set(x,0,z); g.rotation.y = rot;
-    const pole = new THREE_R.Mesh(new THREE_R.BoxGeometry(0.4, 7, 0.4), metal);
-    pole.position.y = 3.5; g.add(pole);
-    const cvs = document.createElement('canvas'); cvs.width = 512; cvs.height = 256;
+  // Directional DISTRICT signs at the four plaza corners (off the roads, facing the plaza).
+  // Each sits in the diagonal that leads to its district, so the name matches the direction.
+  function districtSign(x,z, name, sub, accent){
+    const g = new THREE_R.Group(); g.position.set(x,0,z);
+    g.rotation.y = Math.atan2(-x,-z);   // face the plaza centre
+    const pl = new THREE_R.Mesh(new THREE_R.BoxGeometry(0.45, 7, 0.45), metal); pl.position.set(-3,3.5,0); g.add(pl);
+    const pr = pl.clone(); pr.position.x = 3; g.add(pr);
+    const cvs = document.createElement('canvas'); cvs.width = 512; cvs.height = 220;
     const c = cvs.getContext('2d');
-    c.fillStyle = '#ff9900'; c.fillRect(0,0,512,256);
-    c.fillStyle = '#0b1320'; c.fillRect(0,200,512,8);
-    c.fillStyle = '#0b1320'; c.font = 'bold 64px Segoe UI'; c.textAlign='center';
-    c.fillText(text, 256, 110);
-    c.fillStyle = '#0b1320'; c.font = 'bold 28px Segoe UI';
-    c.fillText(sub, 256, 170);
+    c.fillStyle = '#0b1320'; c.fillRect(0,0,512,220);
+    c.strokeStyle = accent; c.lineWidth = 10; c.strokeRect(8,8,496,204);
+    c.fillStyle = accent; c.font = 'bold 46px Segoe UI'; c.textAlign='center'; c.fillText(name, 256, 92);
+    c.fillStyle = '#cfe0f5'; c.font = '26px Segoe UI'; c.fillText(sub, 256, 150);
+    c.fillStyle = accent; c.font = 'bold 22px Segoe UI'; c.fillText('▲ this way', 256, 188);
     const tex = new THREE_R.CanvasTexture(cvs);
-    const mat = new THREE_R.MeshBasicMaterial({map:tex});
-    neonMaterials.push(mat);
-    const panel = new THREE_R.Mesh(new THREE_R.PlaneGeometry(6, 3), mat);
-    panel.position.y = 6; g.add(panel);
+    const mat = new THREE_R.MeshBasicMaterial({map:tex}); neonMaterials.push(mat);
+    const panel = new THREE_R.Mesh(new THREE_R.PlaneGeometry(7, 3), mat); panel.position.y = 6.5; g.add(panel);
     const panel2 = panel.clone(); panel2.rotation.y = Math.PI; g.add(panel2);
     scene.add(g);
   }
-  billboard( 50, 0, -Math.PI/2, 'AWS CLOUD CITY', 'scale infinitely');
-  billboard(-50, 0,  Math.PI/2, 'EC2 POWER',      'rent what you need');
-  billboard( 0,  50, Math.PI,   'S3 STORAGE',     '99.999999999% durable');
-  billboard( 0, -50, 0,         'DYNAMODB',       'single-digit ms latency');
+  // corners point to: +x,-z=Compute, -x,-z=Storage, -x,+z=Database, +x,+z=Networking
+  districtSign( 46,-46, 'COMPUTE',    'EC2 · Lambda · Auto Scaling', '#9ad36c');
+  districtSign(-46,-46, 'STORAGE',    'S3 · EBS · Glacier',          '#c9a4ff');
+  districtSign(-46, 46, 'DATABASE',   'RDS · DynamoDB',              '#ffc99a');
+  districtSign( 46, 46, 'NETWORKING', 'VPC · Route 53 · CloudFront', '#7ad9ff');
 }
 
 /* =====================================================================
@@ -1640,6 +1820,7 @@ function enhancePlaza(){
   const basin = new THREE_R.Mesh(new THREE_R.CylinderGeometry(7, 7, 1.0, 36),
     new THREE_R.MeshStandardMaterial({color:0x4a4a4a, roughness:0.7}));
   basin.position.y = 0.5; basin.castShadow = true; basin.receiveShadow = true; fountainGroup.add(basin);
+  obstacles.push({x:0, z:0, r:7.6});   // fountain basin is solid
   // water disc inside basin
   const waterMat = new THREE_R.MeshStandardMaterial({color:0x5aafd9, transparent:true, opacity:0.7, metalness:0.4, roughness:0.2});
   const water = new THREE_R.Mesh(new THREE_R.CylinderGeometry(6.4, 6.4, 0.3, 36), waterMat);
@@ -1656,11 +1837,15 @@ function enhancePlaza(){
   fountainGroup.userData.stream = stream;
   scene.add(fountainGroup);
 
-  // tree ring around plaza (just inside the 60r plaza, at r=42)
+  // trees around the plaza, arranged in FOUR ARCS between the road openings
+  // (skip anything near the N/S/E/W axes so nothing sits in a road).
   const trunkMat = new THREE_R.MeshStandardMaterial({color:0x5b3a22});
-  for(let i=0;i<14;i++){
-    const ang = (i/14)*Math.PI*2;
-    const r = 44;
+  for(let i=0;i<24;i++){
+    const ang = (i/24)*Math.PI*2;
+    const deg = ang*180/Math.PI;
+    // skip a wide band around each road axis (0/90/180/270)
+    if([0,90,180,270,360].some(a=>Math.abs(deg-a) < 18)) continue;
+    const r = 46;
     const x = Math.cos(ang)*r, z = Math.sin(ang)*r;
     const trunk = new THREE_R.Mesh(new THREE_R.CylinderGeometry(0.5,0.6,3.2,7), trunkMat);
     trunk.position.set(x,1.6,z); trunk.castShadow = true; scene.add(trunk);
@@ -1669,30 +1854,35 @@ function enhancePlaza(){
     leaf.position.set(x,4.0,z); leaf.castShadow = true; scene.add(leaf);
   }
 
-  // Welcome arch — two poles + arched banner
+  // Welcome GATEWAY ARCH spanning over the north road — poles on the sidewalks
+  // (x=±12, clear of the 18-wide road), a curved arc on top, banner hung high so
+  // you walk/drive UNDER it. Nothing sits in the road itself.
   function archSign(){
     const arch = new THREE_R.Group();
     const poleMat = new THREE_R.MeshStandardMaterial({color:0x222831, metalness:0.5});
-    const pL = new THREE_R.Mesh(new THREE_R.BoxGeometry(0.6, 14, 0.6), poleMat);
-    pL.position.set(-9, 7, 0); arch.add(pL);
-    const pR = pL.clone(); pR.position.x = 9; arch.add(pR);
-    // banner canvas
-    const cvs = document.createElement('canvas'); cvs.width=512; cvs.height=128;
+    const pL = new THREE_R.Mesh(new THREE_R.BoxGeometry(0.7, 13, 0.7), poleMat);
+    pL.position.set(-12, 6.5, 0); arch.add(pL);
+    const pR = pL.clone(); pR.position.x = 12; arch.add(pR);
+    // curved arc connecting the pole tops (half-torus)
+    const archTop = new THREE_R.Mesh(new THREE_R.TorusGeometry(12, 0.5, 10, 28, Math.PI),
+      new THREE_R.MeshStandardMaterial({color:ORANGE, emissive:0x331a00, emissiveIntensity:0.3}));
+    archTop.position.set(0, 13, 0); arch.add(archTop);   // arcs from (-12,13) up and over to (12,13)
+    // banner hung under the arc, high above the road
+    const cvs = document.createElement('canvas'); cvs.width=512; cvs.height=110;
     const c = cvs.getContext('2d');
-    c.fillStyle='#0b1320'; c.fillRect(0,0,512,128);
-    c.strokeStyle='#ff9900'; c.lineWidth=6; c.strokeRect(8,8,496,112);
-    c.fillStyle='#ff9900'; c.font='bold 56px Segoe UI'; c.textAlign='center';
-    c.fillText('WELCOME TO CLOUD CITY', 256, 84);
+    c.fillStyle='#0b1320'; c.fillRect(0,0,512,110);
+    c.strokeStyle='#ff9900'; c.lineWidth=6; c.strokeRect(6,6,500,98);
+    c.fillStyle='#ff9900'; c.font='bold 48px Segoe UI'; c.textAlign='center'; c.textBaseline='middle';
+    c.fillText('WELCOME TO CLOUD CITY', 256, 58);
     const tex = new THREE_R.CanvasTexture(cvs);
-    const bm = new THREE_R.MeshBasicMaterial({map:tex});
-    neonMaterials.push(bm);
-    const banner = new THREE_R.Mesh(new THREE_R.PlaneGeometry(20, 3), bm);
-    banner.position.set(0, 12.5, 0); arch.add(banner);
+    const bm = new THREE_R.MeshBasicMaterial({map:tex}); neonMaterials.push(bm);
+    const banner = new THREE_R.Mesh(new THREE_R.PlaneGeometry(20, 3.4), bm);
+    banner.position.set(0, 11, 0); arch.add(banner);
     const banner2 = banner.clone(); banner2.rotation.y = Math.PI; arch.add(banner2);
     return arch;
   }
   const arch = archSign();
-  arch.position.set(0, 0, -52);
+  arch.position.set(0, 0, -66);   // gateway over the north road, just past the plaza
   scene.add(arch);
 
   // Holographic mascot — orbiting sphere on top of the obelisk
@@ -1907,6 +2097,188 @@ function pickWanderTarget(home){
 }
 // backwards-compatible alias
 function pickPlazaTarget(){ return pickWanderTarget(new THREE_R.Vector3(0,0,0)); }
+
+/* =====================================================================
+   SPECIAL PLACES — Cloud Investigation (reserved) + Zanardi Project (build site)
+   ===================================================================== */
+function signBoard(title, sub, bgHex, fgHex){
+  const grp = new THREE_R.Group();
+  const cvs = document.createElement('canvas'); cvs.width=512; cvs.height=256;
+  const c = cvs.getContext('2d');
+  const hx = h => '#'+(h>>>0).toString(16).padStart(6,'0');
+  c.fillStyle = hx(bgHex); c.fillRect(0,0,512,256);
+  c.strokeStyle = hx(fgHex); c.lineWidth=10; c.strokeRect(10,10,492,236);
+  c.fillStyle = hx(fgHex); c.textAlign='center';
+  c.font='bold 54px Segoe UI'; title.split('\n').forEach((t,i)=>c.fillText(t,256,86+i*60));
+  c.font='bold 32px Segoe UI'; c.fillText(sub,256,224);
+  const tex = new THREE_R.CanvasTexture(cvs);
+  const panel = new THREE_R.Mesh(new THREE_R.PlaneGeometry(8,4), new THREE_R.MeshBasicMaterial({map:tex}));
+  panel.position.y=4.2; grp.add(panel);
+  const panel2 = panel.clone(); panel2.rotation.y=Math.PI; grp.add(panel2);
+  const pm = new THREE_R.MeshStandardMaterial({color:0x333});
+  [-3,3].forEach(dx=>{ const po=new THREE_R.Mesh(new THREE_R.BoxGeometry(0.3,4.2,0.3),pm); po.position.set(dx,2.1,0); grp.add(po); });
+  return grp;
+}
+
+function buildPlace(p){
+  const g = new THREE_R.Group();
+  g.position.set(p.pos[0], 0, p.pos[2]);
+  g.userData = { ...p, isPlace:true };
+  placesRoot.add(g);
+  const padR = p.kind==='zanardi' ? 21 : 13;
+  const pad = new THREE_R.Mesh(new THREE_R.CylinderGeometry(padR,padR,0.3,32),
+    new THREE_R.MeshStandardMaterial({color:0x7a766a, roughness:1}));
+  pad.position.y=0.15; pad.receiveShadow=true; g.add(pad);
+  if(p.kind==='investigation') buildInvestigation(g);
+  else if(p.kind==='zanardi')  buildZanardi(g);
+  const label = makeFloatingLabel(p.name);
+  label.position.set(0, p.kind==='zanardi'?30:17, 0); g.add(label);
+}
+
+function buildInvestigation(g){
+  // a reserved, roped-off empty plot with a "coming soon" board and a forensics motif
+  const postMat = new THREE_R.MeshStandardMaterial({color:0xff9900});
+  for(let i=0;i<10;i++){ const a=i/10*Math.PI*2; const po=new THREE_R.Mesh(new THREE_R.CylinderGeometry(0.12,0.12,1.5,6),postMat);
+    po.position.set(Math.cos(a)*11,0.75,Math.sin(a)*11); g.add(po); }
+  const slab = new THREE_R.Mesh(new THREE_R.BoxGeometry(15,0.35,15), new THREE_R.MeshStandardMaterial({color:0x9a9a88}));
+  slab.position.y=0.32; slab.receiveShadow=true; g.add(slab);
+  // hazard "reserved" grid markings on the slab (a few stripes)
+  for(let i=-2;i<=2;i++){ const s=new THREE_R.Mesh(new THREE_R.BoxGeometry(13,0.02,0.4), new THREE_R.MeshStandardMaterial({color:0xffce5a}));
+    s.position.set(0,0.5,i*3); g.add(s); }
+  // magnifying-glass icon (investigation motif), slowly hint-glowing
+  const ring = new THREE_R.Mesh(new THREE_R.TorusGeometry(1.5,0.28,12,28),
+    new THREE_R.MeshStandardMaterial({color:0x7ad9ff, emissive:0x2a5e7a, emissiveIntensity:0.5}));
+  ring.position.set(0,5.5,0); g.add(ring);
+  const lens = new THREE_R.Mesh(new THREE_R.CircleGeometry(1.3,24),
+    new THREE_R.MeshStandardMaterial({color:0x9be8ff, transparent:true, opacity:0.4}));
+  lens.position.set(0,5.5,0.01); g.add(lens);
+  const handle = new THREE_R.Mesh(new THREE_R.CylinderGeometry(0.22,0.22,2.4,8), new THREE_R.MeshStandardMaterial({color:0x555}));
+  handle.position.set(1.4,3.6,0); handle.rotation.z=-0.7; g.add(handle);
+  const board = signBoard('CLOUD\nINVESTIGATION', 'COMING SOON', 0x14233e, 0x7ad9ff);
+  board.position.set(0,0,-7); g.add(board);
+}
+
+function buildZanardi(g){
+  // shared materials
+  const hoard  = new THREE_R.MeshStandardMaterial({color:0x2f6fb0, roughness:0.8}); // blue site hoarding
+  const hazard = new THREE_R.MeshStandardMaterial({color:0xffcc00, roughness:0.6});
+  const conc   = new THREE_R.MeshStandardMaterial({color:0xbab4a7, roughness:1});
+  const glass  = new THREE_R.MeshStandardMaterial({color:0x9fc2e8, metalness:0.3, roughness:0.4});
+  const dark   = new THREE_R.MeshStandardMaterial({color:0x222});
+  const scaf   = new THREE_R.MeshStandardMaterial({color:0xcfcfcf});
+  const W = 20;  // bigger site
+
+  // closed hoarding fence around the whole site, with hazard cap stripe
+  const wall=(x,z,w,d)=>{ const m=new THREE_R.Mesh(new THREE_R.BoxGeometry(w,3,d),hoard); m.position.set(x,1.5,z); m.castShadow=true; g.add(m); };
+  wall(0,-W,2*W,0.5); wall(0,W,2*W,0.5); wall(-W,0,0.5,2*W); wall(W,0,0.5,2*W);
+  [[-W,2*W,0.55],[W,2*W,0.55]].forEach(([z,w,d])=>{ const s=new THREE_R.Mesh(new THREE_R.BoxGeometry(2*W,0.5,d),hazard); s.position.set(0,3.1,z); g.add(s); });
+
+  // ---- helpers ----
+  function tower(cx,cz, floors, footprint, withScaffold){
+    const grp=new THREE_R.Group(); grp.position.set(cx,0,cz);
+    const half=footprint/2;
+    for(const [dx,dz] of [[-half,-half],[half,-half],[-half,half],[half,half]]){
+      const col=new THREE_R.Mesh(new THREE_R.BoxGeometry(0.7, floors*4+1, 0.7), conc); col.position.set(dx, (floors*4+1)/2, dz); col.castShadow=true; grp.add(col);
+    }
+    for(let f=0;f<floors;f++){ const slab=new THREE_R.Mesh(new THREE_R.BoxGeometry(footprint+0.6,0.4,footprint+0.6),conc); slab.position.y=4.2+f*4; slab.castShadow=true; grp.add(slab); }
+    if(withScaffold){ for(let i=0;i<8;i++){ const a=i/8*Math.PI*2; const pole=new THREE_R.Mesh(new THREE_R.CylinderGeometry(0.08,0.08,floors*3.5,6),scaf);
+      pole.position.set(Math.cos(a)*(half+1.4), floors*1.8, Math.sin(a)*(half+1.4)); grp.add(pole); } }
+    g.add(grp); return grp;
+  }
+  function cladTower(cx,cz, h, fw){ // a more-finished block, partly glazed
+    const grp=new THREE_R.Group(); grp.position.set(cx,0,cz);
+    const body=new THREE_R.Mesh(new THREE_R.BoxGeometry(fw,h,fw), conc); body.position.y=h/2; body.castShadow=true; grp.add(body);
+    // glass on the front face up to ~70% height
+    const gl=new THREE_R.Mesh(new THREE_R.PlaneGeometry(fw-0.6, h*0.7), glass); gl.position.set(0,h*0.42,fw/2+0.03); grp.add(gl);
+    // scaffold on one side (unfinished)
+    for(let f=0;f<Math.floor(h/3);f++){ const bar=new THREE_R.Mesh(new THREE_R.BoxGeometry(fw+0.4,0.08,0.08),scaf); bar.position.set(0,f*3+1.5,-fw/2-0.3); grp.add(bar); }
+    g.add(grp); return grp;
+  }
+  function towerCrane(cx,cz, mastH){
+    const crane=new THREE_R.Group(); crane.position.set(cx,0,cz);
+    const mast=new THREE_R.Mesh(new THREE_R.BoxGeometry(0.8,mastH,0.8),hazard); mast.position.y=mastH/2; mast.castShadow=true; crane.add(mast);
+    const jibGrp=new THREE_R.Group(); jibGrp.position.y=mastH;
+    const jib=new THREE_R.Mesh(new THREE_R.BoxGeometry(22,0.6,0.6),hazard); jib.position.x=7; jibGrp.add(jib);
+    const cjib=new THREE_R.Mesh(new THREE_R.BoxGeometry(7,0.6,0.6),hazard); cjib.position.x=-3.5; jibGrp.add(cjib);
+    const line=new THREE_R.Mesh(new THREE_R.CylinderGeometry(0.05,0.05,9,4),dark); line.position.set(14,-4.5,0); jibGrp.add(line);
+    const hook=new THREE_R.Mesh(new THREE_R.BoxGeometry(1.1,1.1,1.1),conc); hook.position.set(14,-9.5,0); jibGrp.add(hook);
+    crane.add(jibGrp); g.add(crane); zanardiCranes.push(jibGrp);
+  }
+  function excavator(cx,cz, rot){
+    const exc=new THREE_R.Group(); exc.position.set(cx,0,cz); exc.rotation.y=rot;
+    const tracks=new THREE_R.Mesh(new THREE_R.BoxGeometry(3,1,4.4),dark); tracks.position.y=0.5; exc.add(tracks);
+    const body=new THREE_R.Mesh(new THREE_R.BoxGeometry(2.4,1.6,3),hazard); body.position.y=1.8; exc.add(body);
+    const cab=new THREE_R.Mesh(new THREE_R.BoxGeometry(1.5,1.4,1.4), new THREE_R.MeshStandardMaterial({color:0x16324a,transparent:true,opacity:0.7})); cab.position.set(0,2.9,0.6); exc.add(cab);
+    const arm=new THREE_R.Group(); arm.position.set(0,2.2,-1.3);
+    const boom=new THREE_R.Mesh(new THREE_R.BoxGeometry(0.5,0.5,4.2),hazard); boom.position.z=-1.8; boom.rotation.x=0.4; arm.add(boom);
+    const bucket=new THREE_R.Mesh(new THREE_R.BoxGeometry(1.3,0.9,0.9),dark); bucket.position.set(0,-1.1,-3.6); arm.add(bucket);
+    exc.add(arm); g.add(exc); zanardiExcArms.push(arm);
+  }
+  function worker(wx,wz){
+    const w=new THREE_R.Group(); w.position.set(wx,0,wz); w.rotation.y=Math.random()*6.28;
+    const lg=new THREE_R.Mesh(new THREE_R.BoxGeometry(0.6,1.0,0.35), new THREE_R.MeshStandardMaterial({color:0x223})); lg.position.y=0.5; w.add(lg);
+    const bd=new THREE_R.Mesh(new THREE_R.BoxGeometry(0.72,1.0,0.42), new THREE_R.MeshStandardMaterial({color:0xff7a18})); bd.position.y=1.25; w.add(bd);
+    const hd=new THREE_R.Mesh(new THREE_R.BoxGeometry(0.42,0.42,0.42), new THREE_R.MeshStandardMaterial({color:'#e8b08a'})); hd.position.y=2.0; w.add(hd);
+    const hat=new THREE_R.Mesh(new THREE_R.SphereGeometry(0.3,10,6,0,Math.PI*2,0,Math.PI/2), hazard); hat.position.y=2.2; w.add(hat);
+    g.add(w);
+  }
+  function truck(cx,cz, rot, kind){
+    const t=new THREE_R.Group(); t.position.set(cx,0,cz); t.rotation.y=rot;
+    const cab=new THREE_R.Mesh(new THREE_R.BoxGeometry(2.2,2,2.4), hazard); cab.position.set(0,1.4,2.4); cab.castShadow=true; t.add(cab);
+    if(kind==='mixer'){
+      const drum=new THREE_R.Mesh(new THREE_R.CylinderGeometry(1.6,1.3,4,12), conc); drum.position.set(0,2.4,-1.4); drum.rotation.z=Math.PI/2; t.add(drum);
+    } else { // dump
+      const bed=new THREE_R.Mesh(new THREE_R.BoxGeometry(2.4,1.6,4.4), new THREE_R.MeshStandardMaterial({color:0x555})); bed.position.set(0,1.8,-1.4); t.add(bed);
+      const load=new THREE_R.Mesh(new THREE_R.ConeGeometry(1.4,1.2,8), new THREE_R.MeshStandardMaterial({color:0x6b4f2a})); load.position.set(0,3,-1.4); t.add(load);
+    }
+    for(const [dx,dz] of [[-1.1,2.2],[1.1,2.2],[-1.1,-2.2],[1.1,-2.2]]){
+      const wh=new THREE_R.Mesh(new THREE_R.CylinderGeometry(0.6,0.6,0.4,12),dark); wh.rotation.z=Math.PI/2; wh.position.set(dx,0.6,dz); t.add(wh);
+    }
+    g.add(t);
+  }
+
+  // ---- three+ buildings at different stages ----
+  tower(-10,-9, 5, 7, true);      // tall steel/concrete frame w/ scaffolding
+  cladTower(11,10, 22, 8);        // taller, partly-clad glass block
+  tower(11,-9, 2, 6, false);      // early-stage low frame
+  // foundation pit (early stage) — recessed dark slab + rebar stubs
+  const pit=new THREE_R.Mesh(new THREE_R.BoxGeometry(10,0.5,10), new THREE_R.MeshStandardMaterial({color:0x3a3a3a})); pit.position.set(-10,0.3,10); g.add(pit);
+  for(let i=0;i<16;i++){ const r=new THREE_R.Mesh(new THREE_R.CylinderGeometry(0.06,0.06,1.6,5), new THREE_R.MeshStandardMaterial({color:0x8a5a2a}));
+    r.position.set(-13.5+(i%4)*2.3, 1.1, 6.5+Math.floor(i/4)*2.3); g.add(r); }
+
+  // ---- two cranes ----
+  towerCrane(-3,-3, 26);
+  towerCrane(4,4, 30);
+
+  // ---- three excavators / JCBs ----
+  excavator(-3,9, -0.6);
+  excavator(6,-3, 1.9);
+  excavator(-12,2, 0.4);
+
+  // ---- vehicles ----
+  truck(13,-2, -1.2, 'mixer');
+  truck(-6,14, 2.4, 'dump');
+
+  // ---- material stacks + dirt mounds ----
+  for(let i=0;i<4;i++){ const pal=new THREE_R.Mesh(new THREE_R.BoxGeometry(2.4,0.8,1.6), conc); pal.position.set(15,0.4+i*0.85,6); g.add(pal); }
+  [[ -15,-13],[14,-13]].forEach(([dx,dz])=>{ const dirt=new THREE_R.Mesh(new THREE_R.ConeGeometry(2.6,2,12), new THREE_R.MeshStandardMaterial({color:0x6b4f2a})); dirt.position.set(dx,1,dz); g.add(dirt); });
+
+  // ---- ~9 hard-hat workers scattered around the site ----
+  [[2,-6],[-6,4],[6,-1],[0,8],[-12,-4],[9,5],[-2,12],[13,1],[-9,-12]].forEach(([wx,wz])=>worker(wx,wz));
+
+  // ---- signs on the front + back hoarding ----
+  const board = signBoard('ZANARDI\nPROJECT', 'UNDER CONSTRUCTION', 0x141414, 0xffcc00);
+  board.position.set(0,0,W+1.5); g.add(board);
+}
+
+function nearestPlace(radius){
+  let best=null, bd=radius;
+  for(const p of PLACES){
+    const d = Math.hypot(p.pos[0]-playerMesh.position.x, p.pos[2]-playerMesh.position.z);
+    if(d < bd){ bd=d; best=p; }
+  }
+  return best;
+}
 
 /* =====================================================================
    LANDMARK BUILDERS — each visual is distinct
@@ -2249,6 +2621,7 @@ function bindInput(){
     if(e.code==='KeyO'){ openOutfit(); }
     if(e.code==='KeyJ'){ openGigs(); }
     if(e.code==='KeyF'){ openMap(); } // fast travel via map
+    if(e.code==='KeyI'){ toggleControls(); }
     // time-speed controls ([ slows, ] speeds, \ pauses)
     if(e.code==='BracketLeft'  || e.code==='Minus' || e.code==='NumpadSubtract'){
       timeSpeed = Math.max(0.25, +(timeSpeed/2).toFixed(2));
@@ -2267,6 +2640,8 @@ function bindInput(){
       gameTime = (gameTime + 6) % 24;
       showToast('Skipped ahead', phaseName(gameTime));
     }
+    if(e.code==='KeyH'){ AudioFX.horn(); }                 // honk
+    if(e.code==='Digit0'||e.code==='Numpad0'){ toggleMute(); }
   });
   window.addEventListener('keyup', (e)=>{
     keys[e.code] = false;
@@ -2329,6 +2704,8 @@ function bindHUD(){
       if(e.target === ov){ ov.classList.remove('show'); state = 'playing'; }
     });
   });
+  const mute = document.getElementById('muteBtn');
+  if(mute) mute.onclick = ()=>{ AudioFX.init(); AudioFX.resume(); toggleMute(); };
 }
 
 function closeAllOverlays(){
@@ -2336,6 +2713,25 @@ function closeAllOverlays(){
   state = 'playing';
   activeBuildingDemo && (activeBuildingDemo.stop = true);
   activeBuildingDemo = null;
+}
+
+// Mute / unmute all audio (button in the top-right + the 0 key).
+function toggleMute(){
+  AudioFX.muted = !AudioFX.muted;
+  AudioFX.setMuted(AudioFX.muted);
+  const btn = document.getElementById('muteBtn');
+  if(btn){ btn.textContent = AudioFX.muted ? '🔇' : '🔊'; btn.classList.toggle('muted', AudioFX.muted); }
+}
+
+// Toggle the controls cheat-sheet with the I key. When the full panel is showing,
+// the tiny "[I] controls" hint chip is hidden, and vice-versa.
+function toggleControls(){
+  const panel = document.getElementById('controls');
+  const hint  = document.getElementById('ctrlHint');
+  if(!panel) return;
+  const show = panel.classList.contains('hidden');   // currently hidden → about to show
+  panel.classList.toggle('hidden', !show);
+  if(hint) hint.classList.toggle('hidden', show);
 }
 
 /* =====================================================================
@@ -2356,6 +2752,22 @@ function animate(){
 }
 
 function updatePlayer(dt){
+  // ---- accident sequence: freeze control, then respawn ----
+  if(crashing){
+    crashTimer -= dt;
+    playerMoving = false;
+    if(crashTimer <= 0){
+      crashing = false;
+      crashCooldown = 1.5;
+      playerMesh.position.copy(lastSafePos);
+      playerMesh.position.y = 0;
+      cameraYaw = playerMesh.rotation.y;
+      showToast('Respawned', 'Back on the street — drive safe!');
+    }
+    return;
+  }
+  if(crashCooldown > 0) crashCooldown -= dt;
+
   // movement input (WASD + joystick)
   let mx = 0, mz = 0;
   if(keys['KeyW']) mz -= 1;
@@ -2409,10 +2821,69 @@ function updatePlayer(dt){
     ease(playerAvatar.children.find(c=>c.name==='legR'),0);
   }
 
+  // block walking through solid objects (buildings, fountain, obelisk)
+  resolveCollisions(playerMesh.position);
+
   // soft clamp to map
   const lim = 560;
   playerMesh.position.x = Math.max(-lim, Math.min(lim, playerMesh.position.x));
   playerMesh.position.z = Math.max(-lim, Math.min(lim, playerMesh.position.z));
+
+  // crash with traffic? and remember the last car-free spot for respawn
+  checkVehicleCrash();
+}
+
+// Trigger an accident when the player runs into a moving or parked car.
+function checkVehicleCrash(){
+  if(crashing || crashCooldown > 0) return;
+  const px = playerMesh.position.x, pz = playerMesh.position.z;
+  let nearCar = false;
+  function hits(group, radius){
+    if(!group) return false;
+    for(let i=0;i<group.children.length;i++){
+      const c = group.children[i];
+      const dx = c.position.x - px, dz = c.position.z - pz;
+      if(Math.abs(dx) > radius || Math.abs(dz) > radius) continue;
+      if(dx*dx + dz*dz < radius*radius){ return true; }
+    }
+    return false;
+  }
+  if(hits(trafficGroup, 2.9) || hits(parkedCarsGroup, 2.7)){ triggerCrash(); return; }
+  // record a safe respawn point only when clear of all cars (within a wider margin)
+  nearCar = hits(trafficGroup, 6) || hits(parkedCarsGroup, 5);
+  if(!nearCar){ lastSafePos.copy(playerMesh.position); }
+}
+
+function triggerCrash(){
+  if(crashing) return;
+  crashing = true;
+  crashTimer = 1.2;
+  AudioFX.crash();
+  const fx = document.getElementById('crashFx'); if(fx){ fx.classList.remove('show'); void fx.offsetWidth; fx.classList.add('show'); setTimeout(()=>fx.classList.remove('show'), 700); }
+  if(renderer){ const cv = renderer.domElement; cv.classList.remove('shake-cam'); void cv.offsetWidth; cv.classList.add('shake-cam'); setTimeout(()=>cv.classList.remove('shake-cam'), 540); }
+  if(player.vehicle) dismountVehicle();
+  showToast('💥 Accident!', 'You hit a vehicle. Respawning…');
+}
+
+// Push the player out of any overlapping obstacle circle so they stop at / slide along walls.
+function resolveCollisions(pos){
+  const pr = player.vehicle ? 1.9 : 1.2;   // player/vehicle radius
+  for(let pass=0; pass<2; pass++){
+    for(let i=0;i<obstacles.length;i++){
+      const o = obstacles[i];
+      const dx = pos.x - o.x, dz = pos.z - o.z;
+      const min = o.r + pr;
+      // cheap reject before sqrt
+      if(Math.abs(dx) > min || Math.abs(dz) > min) continue;
+      const d = Math.hypot(dx, dz);
+      if(d < min){
+        if(d < 1e-4){ pos.x = o.x + min; continue; }
+        const k = (min - d) / d;
+        pos.x += dx * k;
+        pos.z += dz * k;
+      }
+    }
+  }
 }
 
 function lerpAngle(a, b, t){
@@ -2631,6 +3102,11 @@ function updateWorld(dt){
     }
   }
 
+  // ---------- Zanardi construction animation ----------
+  const cnow = performance.now()*0.001;
+  for(let i=0;i<zanardiCranes.length;i++){ zanardiCranes[i].rotation.y += dt*(0.10 + i*0.05); }   // cranes slew at different speeds
+  for(let i=0;i<zanardiExcArms.length;i++){ zanardiExcArms[i].rotation.x = 0.15 + Math.sin(cnow*1.1 + i*1.7)*0.28; } // excavators dig
+
   // ---------- fountain + hologram animation ----------
   if(fountainGroup){
     const t = performance.now()*0.001;
@@ -2716,6 +3192,9 @@ function updateWorld(dt){
       if(cl.position.x > 700) cl.position.x = -700;
     }
   }
+
+  // ---------- ambient audio (random horns + crowd murmur near the plaza) ----------
+  AudioFX.update(dt, Math.hypot(playerMesh.position.x, playerMesh.position.z) < 100);
 }
 
 /* =====================================================================
@@ -2770,7 +3249,13 @@ function updateHUD(dt){
     hint.innerHTML = `Press <b>E</b> to talk to NPC — gig: <b>${nearNpc.userData.gig.title}</b>`;
     hint.classList.add('show');
   } else {
-    hint.classList.remove('show');
+    const place = nearestPlace(26);
+    if(place){
+      hint.innerHTML = `Press <b>E</b> to view <b>${place.name}</b> (${place.tag})`;
+      hint.classList.add('show');
+    } else {
+      hint.classList.remove('show');
+    }
   }
 
   drawMiniMap();
@@ -2814,7 +3299,10 @@ function tryEnter(){
     return;
   }
   const near = nearestLandmark(13);
-  if(near){ openBuilding(near); }
+  if(near){ openBuilding(near); return; }
+  // special places — view only (not enterable yet)
+  const place = nearestPlace(26);
+  if(place){ AudioFX.click(); showToast(place.name + ' · ' + place.tag, place.msg); }
 }
 
 function openBuilding(b){
@@ -2838,10 +3326,12 @@ function openBuilding(b){
     handsSetup(b);
   }
 
+  AudioFX.click();
   // award badge
   if(!player.badges.has(b.id)){
     player.badges.add(b.id);
     showToast('Badge unlocked', b.name + ' — added to your encyclopedia.');
+    AudioFX.chime();
     checkDistrictMastery(b.district);
   }
 
@@ -3288,6 +3778,7 @@ function completeConsoleLab(b){
   const tag=document.getElementById('bSolvedTag'); if(tag) tag.style.display='inline-block';
   if(!player.handsonSolved.has(b.id)){
     player.handsonSolved.add(b.id);
+    AudioFX.success();
     showToast('Hands-on complete', b.name + ' configured correctly (' + player.handsonSolved.size + '/' + LANDMARKS.length + ').');
     if(activeGig){
       const g = GIGS.find(x=>x.id===activeGig.id);
@@ -4017,6 +4508,11 @@ function drawMiniMap(){
     ctx.fillStyle = player.badges.has(b.id) ? '#5cdb95' : '#ff9900';
     ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI*2); ctx.fill();
   });
+  // special places
+  PLACES.forEach(p=>{
+    ctx.fillStyle = p.kind==='zanardi' ? '#ffcc33' : '#b48bff';
+    ctx.beginPath(); ctx.arc(cx + p.pos[0]*scale, cy + p.pos[2]*scale, 4, 0, Math.PI*2); ctx.fill();
+  });
   // npcs
   npcGroup && npcGroup.children.forEach(n=>{
     ctx.fillStyle = '#3b6cff';
@@ -4039,17 +4535,22 @@ function openMap(){
   state = 'overlay';
   document.getElementById('mapOverlay').classList.add('show');
 
-  // clickable landmark list — guaranteed fast travel regardless of canvas hit-testing
+  // ---- ordered points: services (1..N) then special places ----
+  const points = [];
+  LANDMARKS.forEach(b=> points.push({ ref:b, type:'lm', name:b.name, sub:DISTRICTS[b.district].name,
+    col: player.handsonSolved.has(b.id) ? '#5cdb95' : (player.badges.has(b.id) ? '#7ad9ff' : '#ff9900') }));
+  PLACES.forEach(p=> points.push({ ref:p, type:'place', name:p.name, sub:p.tag,
+    col: p.kind==='zanardi' ? '#ffcc33' : '#b48bff' }));
+
+  // clickable numbered list — the reliable way to fast travel
   const list = document.getElementById('travelList');
   if(list){
     list.innerHTML = '';
-    LANDMARKS.forEach(b=>{
-      const visited = player.badges.has(b.id);
+    points.forEach((pt,i)=>{
       const d = document.createElement('div');
-      d.className = 'bcard';
-      d.style.cursor = 'pointer';
-      d.innerHTML = `<div class="b-ttl">${b.name}</div><div class="b-desc">${DISTRICTS[b.district].name}${visited?' • visited':''}</div>`;
-      d.onclick = ()=> fastTravelTo(b);
+      d.className = 'bcard'; d.style.cursor = 'pointer';
+      d.innerHTML = `<div class="b-ttl"><span style="display:inline-block;min-width:18px;color:${pt.col}">${i+1}.</span> ${pt.name}</div><div class="b-desc">${pt.sub}</div>`;
+      d.onclick = ()=> fastTravelTo(pt.ref);
       list.appendChild(d);
     });
   }
@@ -4077,7 +4578,7 @@ function openMap(){
   ctx.beginPath(); ctx.moveTo(40,cy); ctx.lineTo(W-40,cy); ctx.stroke();
   ctx.setLineDash([]);
 
-  // ---- district tiles (rounded, accent-colored) ----
+  // ---- district tiles — ONE label, centered at the top of each tile ----
   Object.entries(DISTRICTS).forEach(([id, d])=>{
     const tx = cx + d.center[0]*scale - 110*scale;
     const ty = cy + d.center[2]*scale - 110*scale;
@@ -4085,43 +4586,34 @@ function openMap(){
     rr(tx,ty,ts,ts,16);
     ctx.fillStyle = hexA(d.color.accent, 0.16); ctx.fill();
     ctx.lineWidth = 2; ctx.strokeStyle = hexA(d.color.accent, 0.85); ctx.stroke();
-    // label chip
-    ctx.font = 'bold 16px Segoe UI';
+    ctx.font = 'bold 23px Segoe UI'; ctx.textAlign='center'; ctx.textBaseline='middle';
     const tw = ctx.measureText(d.name).width;
-    rr(tx+10, ty+10, tw+18, 26, 8); ctx.fillStyle='rgba(7,11,22,0.7)'; ctx.fill();
-    ctx.fillStyle = d.color.accent; ctx.textBaseline='middle'; ctx.textAlign='left';
-    ctx.fillText(d.name, tx+19, ty+24);
+    const lx = tx + ts/2, ly = ty + 26;
+    rr(lx - tw/2 - 12, ly - 17, tw + 24, 34, 9); ctx.fillStyle='rgba(7,11,22,0.72)'; ctx.fill();
+    ctx.fillStyle = d.color.accent; ctx.fillText(d.name, lx, ly);
   });
 
   // ---- downtown plaza hub ----
   ctx.beginPath(); ctx.arc(cx,cy,60*scale,0,Math.PI*2);
   ctx.fillStyle='rgba(255,153,0,0.10)'; ctx.fill();
   ctx.lineWidth=2; ctx.strokeStyle='rgba(255,153,0,0.6)'; ctx.stroke();
-  ctx.beginPath(); ctx.arc(cx,cy,5,0,Math.PI*2); ctx.fillStyle=ORANGE_HEX; ctx.fill();
-  ctx.font='bold 12px Segoe UI'; ctx.fillStyle='#ffce8a'; ctx.textAlign='center';
-  ctx.fillText('DOWNTOWN', cx, cy+60*scale+14);
+  ctx.beginPath(); ctx.arc(cx,cy,7,0,Math.PI*2); ctx.fillStyle=ORANGE_HEX; ctx.fill();
+  ctx.font='bold 18px Segoe UI'; ctx.fillStyle='#ffce8a'; ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText('DOWNTOWN', cx, cy+60*scale+18);
 
-  // ---- landmark pins (clickable) ----
+  // ---- numbered pins (no overlapping names → neat) ----
   const hits = [];
-  ctx.textAlign='left'; ctx.textBaseline='middle';
-  LANDMARKS.forEach(b=>{
-    const x = cx + b.pos[0]*scale;
-    const y = cy + b.pos[2]*scale;
-    const visited = player.badges.has(b.id);
-    const solved = player.handsonSolved.has(b.id);
-    const col = solved ? '#5cdb95' : (visited ? '#7ad9ff' : '#ff9900');
-    // glow
-    ctx.beginPath(); ctx.arc(x,y,12,0,Math.PI*2); ctx.fillStyle = hexA(col,0.22); ctx.fill();
-    // pin
-    ctx.beginPath(); ctx.arc(x,y,7,0,Math.PI*2); ctx.fillStyle = col; ctx.fill();
-    ctx.lineWidth=2; ctx.strokeStyle='rgba(255,255,255,0.85)'; ctx.stroke();
-    if(solved){ ctx.fillStyle='#062013'; ctx.font='bold 9px Segoe UI'; ctx.textAlign='center'; ctx.fillText('✓',x,y+0.5); ctx.textAlign='left'; }
-    // label chip
-    ctx.font='11px Segoe UI';
-    const tw = ctx.measureText(b.name).width;
-    rr(x+11, y-9, tw+12, 18, 6); ctx.fillStyle='rgba(7,11,22,0.78)'; ctx.fill();
-    ctx.fillStyle='#eaf2ff'; ctx.fillText(b.name, x+17, y+0.5);
-    hits.push({b, x, y});
+  points.forEach((pt,i)=>{
+    const x = cx + pt.ref.pos[0]*scale;
+    const y = cy + pt.ref.pos[2]*scale;
+    ctx.beginPath(); ctx.arc(x,y,18,0,Math.PI*2); ctx.fillStyle = hexA(pt.col,0.22); ctx.fill();
+    ctx.beginPath(); ctx.arc(x,y,14,0,Math.PI*2); ctx.fillStyle = pt.col; ctx.fill();
+    ctx.lineWidth=2.5; ctx.strokeStyle = pt.type==='place' ? '#fff' : 'rgba(255,255,255,0.9)'; ctx.stroke();
+    // place pins get an extra outer ring so they read as "special"
+    if(pt.type==='place'){ ctx.beginPath(); ctx.arc(x,y,21,0,Math.PI*2); ctx.lineWidth=2; ctx.strokeStyle=hexA(pt.col,0.8); ctx.setLineDash([5,4]); ctx.stroke(); ctx.setLineDash([]); }
+    ctx.fillStyle='#06121f'; ctx.font='bold 17px Segoe UI'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(String(i+1), x, y+0.5);
+    hits.push({b:pt.ref, x, y});
   });
 
   // ---- player marker: heading arrow ----
@@ -4134,17 +4626,20 @@ function openMap(){
   ctx.fillStyle='#ffffff'; ctx.fill(); ctx.lineWidth=1.5; ctx.strokeStyle=ORANGE_HEX; ctx.stroke();
   ctx.restore();
 
-  // ---- legend ----
-  ctx.textAlign='left'; ctx.font='12px Segoe UI';
-  const leg=[['#ff9900','Unvisited'],['#7ad9ff','Visited'],['#5cdb95','Lab solved'],['#ffffff','You']];
-  rr(14, H-14-leg.length*20-8, 150, leg.length*20+12, 10); ctx.fillStyle='rgba(7,11,22,0.8)'; ctx.fill();
-  leg.forEach(([cc,txt],i)=>{ const ly=H-14-leg.length*20+i*20; ctx.beginPath(); ctx.arc(28,ly,5,0,Math.PI*2); ctx.fillStyle=cc; ctx.fill(); ctx.fillStyle='#cfe0f5'; ctx.fillText(txt,40,ly+0.5); });
+  // ---- legend (enlarged for readability) ----
+  ctx.textAlign='left'; ctx.textBaseline='middle'; ctx.font='bold 20px Segoe UI';
+  const leg=[['#ff9900','Unvisited'],['#7ad9ff','Visited'],['#5cdb95','Lab solved'],['#b48bff','Coming soon'],['#ffcc33','Construction'],['#ffffff','You']];
+  const lrow=32, lpad=16, lboxW=240, lboxH=leg.length*lrow+lpad*2-12;
+  const ltop=H-18-lboxH;
+  rr(18, ltop, lboxW, lboxH, 12); ctx.fillStyle='rgba(7,11,22,0.85)'; ctx.strokeStyle='rgba(255,255,255,0.12)'; ctx.lineWidth=1.5; ctx.fill(); ctx.stroke();
+  leg.forEach(([cc,txt],i)=>{ const ly=ltop+lpad+8+i*lrow; ctx.beginPath(); ctx.arc(40,ly,8,0,Math.PI*2); ctx.fillStyle=cc; ctx.fill(); ctx.fillStyle='#e6eefb'; ctx.fillText(txt,58,ly); });
   ctx.textBaseline='alphabetic';
 
   // Replace any prior handler so opening the map repeatedly does not accumulate listeners.
   // FORGIVING fast travel: click anywhere — we jump to the NEAREST landmark to the click
   // (within a generous radius), so you don't have to hit the dot pixel-perfectly.
-  c.onclick = null;
+  // Click ANYWHERE on the map → travel to the nearest landmark to the click. No dead zones:
+  // clicking a road, a district, or a pin all work (the nearest pin wins).
   c.onclick = (e)=>{
     const r = c.getBoundingClientRect();
     if(r.width < 4 || r.height < 4) return; // canvas not laid out
@@ -4155,11 +4650,9 @@ function openMap(){
       const d = Math.hypot(h.x-x, h.y-y);
       if(d < bestD){ bestD = d; best = h; }
     }
-    // accept clicks within ~90 canvas px of the nearest landmark
-    if(best && bestD < 90){
-      fastTravelTo(best.b);
-    }
+    if(best) fastTravelTo(best.b);
   };
+  c.style.cursor = 'pointer';
 }
 // Shared fast-travel helper — also used by the clickable landmark list.
 function fastTravelTo(b){
