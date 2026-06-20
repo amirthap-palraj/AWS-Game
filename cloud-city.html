@@ -488,6 +488,14 @@ const PANTS    = ['#222831','#3a4763','#6b3f2e','#1a1a1a','#5b5b5b','#3a6e3a'];
 const SHOES    = ['#1a1a1a','#3a2114','#ffffff','#c0392b','#1e3a8a'];
 const HAIRSTYLES = ['Short','Bun','Mohawk','Curly','Bald','Long'];
 const BODIES = ['Slim','Average','Stocky'];
+// Set ctx.font to the largest size (<= px) at which `text` fits within maxW — prevents
+// long sign text from overflowing a fixed-width canvas and getting clipped.
+function fitFont(ctx, text, maxW, weight, px){
+  let size = px;
+  const set = ()=>{ ctx.font = (weight ? weight+' ' : '') + size + 'px Segoe UI'; };
+  set();
+  while(size > 9 && ctx.measureText(text).width > maxW){ size -= 1; set(); }
+}
 const ACCS = ['None','Glasses','Cap','Headset'];
 const ROLES = [
   { id:'developer',  name:'Developer',         icon:'⌨', start:'compute',  jacket:'#ff9900', desc:'Compute District' },
@@ -1342,7 +1350,7 @@ function makeBanner(text, accent){
   c.fillStyle = accent || '#ff9900';
   c.fillRect(0,0,12,128);
   c.fillStyle = '#ff9900';
-  c.font = 'bold 56px Segoe UI';
+  fitFont(c, text, 466, 'bold', 56);
   c.fillText(text, 32, 80);
   const tex = new THREE_R.CanvasTexture(cvs);
   const mat = new THREE_R.MeshBasicMaterial({map:tex, transparent:true, color:0xffffff});
@@ -1670,8 +1678,9 @@ function buildStreetFurniture(){
     const c = cvs.getContext('2d');
     c.fillStyle = '#0b1320'; c.fillRect(0,0,512,220);
     c.strokeStyle = accent; c.lineWidth = 10; c.strokeRect(8,8,496,204);
-    c.fillStyle = accent; c.font = 'bold 46px Segoe UI'; c.textAlign='center'; c.fillText(name, 256, 92);
-    c.fillStyle = '#cfe0f5'; c.font = '26px Segoe UI'; c.fillText(sub, 256, 150);
+    c.textAlign='center'; c.textBaseline='alphabetic';
+    c.fillStyle = accent; fitFont(c, name, 460, 'bold', 46); c.fillText(name, 256, 92);
+    c.fillStyle = '#cfe0f5'; fitFont(c, sub, 470, '', 26); c.fillText(sub, 256, 150);
     c.fillStyle = accent; c.font = 'bold 22px Segoe UI'; c.fillText('▲ this way', 256, 188);
     const tex = new THREE_R.CanvasTexture(cvs);
     const mat = new THREE_R.MeshBasicMaterial({map:tex}); neonMaterials.push(mat);
@@ -1872,7 +1881,8 @@ function enhancePlaza(){
     const c = cvs.getContext('2d');
     c.fillStyle='#0b1320'; c.fillRect(0,0,512,110);
     c.strokeStyle='#ff9900'; c.lineWidth=6; c.strokeRect(6,6,500,98);
-    c.fillStyle='#ff9900'; c.font='bold 48px Segoe UI'; c.textAlign='center'; c.textBaseline='middle';
+    c.fillStyle='#ff9900'; c.textAlign='center'; c.textBaseline='middle';
+    fitFont(c, 'WELCOME TO CLOUD CITY', 470, 'bold', 48);
     c.fillText('WELCOME TO CLOUD CITY', 256, 58);
     const tex = new THREE_R.CanvasTexture(cvs);
     const bm = new THREE_R.MeshBasicMaterial({map:tex}); neonMaterials.push(bm);
@@ -2109,8 +2119,8 @@ function signBoard(title, sub, bgHex, fgHex){
   c.fillStyle = hx(bgHex); c.fillRect(0,0,512,256);
   c.strokeStyle = hx(fgHex); c.lineWidth=10; c.strokeRect(10,10,492,236);
   c.fillStyle = hx(fgHex); c.textAlign='center';
-  c.font='bold 54px Segoe UI'; title.split('\n').forEach((t,i)=>c.fillText(t,256,86+i*60));
-  c.font='bold 32px Segoe UI'; c.fillText(sub,256,224);
+  title.split('\n').forEach((t,i)=>{ fitFont(c, t, 470, 'bold', 54); c.fillText(t,256,86+i*60); });
+  fitFont(c, sub, 470, 'bold', 32); c.fillText(sub,256,224);
   const tex = new THREE_R.CanvasTexture(cvs);
   const panel = new THREE_R.Mesh(new THREE_R.PlaneGeometry(8,4), new THREE_R.MeshBasicMaterial({map:tex}));
   panel.position.y=4.2; grp.add(panel);
@@ -2328,8 +2338,8 @@ function makeFloatingLabel(text){
   roundRect(c, 4, 8, 504, 80, 14); c.fill();
   c.strokeStyle = '#ff9900'; c.lineWidth = 3; c.stroke();
   c.fillStyle = '#ff9900';
-  c.font = 'bold 38px Segoe UI';
   c.textAlign = 'center'; c.textBaseline = 'middle';
+  fitFont(c, text, 480, 'bold', 38);
   c.fillText(text, 256, 48);
   const tex = new THREE_R.CanvasTexture(cvs);
   const mat = new THREE_R.SpriteMaterial({map:tex, depthTest:true, depthWrite:false, transparent:true});
