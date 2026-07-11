@@ -1,0 +1,176 @@
+%PDF-1.4
+%ту╧╙
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Length 5852 >>
+stream
+BT /F2 17.00 Tf 1 0 0 1 54.00 728.00 Tm (Architecture) Tj ET
+BT /F2 13.00 Tf 1 0 0 1 54.00 689.00 Tm (Overview) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 664.00 Tm (This project is an AI-powered multi-client engineering-standards assistant built on) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 649.50 Tm (Cognizant's neuro-san framework. It accepts a developer's plain-English question and) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 635.00 Tm (routes it through three real levels - client -> team -> topic - then answers using) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 620.50 Tm (only that client's standards. An identity layer restricts each developer to the client) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 606.00 Tm (they are authorized for.) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 586.50 Tm (The system is a Streamlit web frontend, a Python backend, and a multi-agent) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 572.00 Tm (network orchestrated by neuro-san.) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 552.50 m 558.00 552.50 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 528.50 Tm (System Architecture Diagram) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 499.50 Tm (+-----------------------------------------------------------------------+) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 488.88 Tm (|                          User \(Browser\)                              |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 478.25 Tm (+-------------------------------+---------------------------------------+) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 467.62 Tm (                                |  HTTP \(Streamlit\)) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 457.00 Tm (+-------------------------------v---------------------------------------+) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 446.38 Tm (|                      Frontend \(frontend/run.py\)                      |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 435.75 Tm (|                     Streamlit Chat Interface                         |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 425.12 Tm (|  - Renders chat messages                                             |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 414.50 Tm (|  - Persists chat_context AND sly_data across turns \(session memory\)  |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 403.88 Tm (+-------------------------------+---------------------------------------+) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 393.25 Tm (                                |  invoke_agent\(name, text, sly_data, chat_context\)) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 382.62 Tm (+-------------------------------v---------------------------------------+) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 372.00 Tm (|                       Backend \(backend/run.py\)                       |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 361.38 Tm (|               DirectAgentSessionFactory \(neuro-san\)                 |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 350.75 Tm (|  - Sets AGENT_MANIFEST_FILE, AGENT_TOOL_PATH, PYTHONPATH             |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 340.12 Tm (|  - Creates an in-process agent session \(no separate server\)          |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 329.50 Tm (|  - Streams the chat and returns the final message                    |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 318.88 Tm (+-------------------------------+---------------------------------------+) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 308.25 Tm (                                |  neuro-san Agent Engine) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 297.62 Tm (+-------------------------------v---------------------------------------+) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 287.00 Tm (|                    neuro-san Multi-Agent Network                     |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 276.38 Tm (|            \(backend/registries/standards_concierge.hocon\)           |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 265.75 Tm (|                                                                      |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 255.12 Tm (|   Standards_Concierge  \(front desk\)                                  |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 244.50 Tm (|     - EmployeeDirectory  \(CodedTool\): identity -> authorized scope    |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 233.88 Tm (|     - ClientResolver     \(CodedTool\): repo/project -> client          |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 223.25 Tm (|     |                                                                |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 212.62 Tm (|     v                                                                |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 202.00 Tm (|   Client_Router  \(L1: which client?\)                                 |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 191.38 Tm (|     v                                                                |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 180.75 Tm (|   Client_<X>     \(L2: which team? - depth varies per client\)         |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 170.12 Tm (|     v                                                                |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 159.50 Tm (|   <X>_Team_<Y>   \(L3: which topic? coding/security/deploy/tools\)     |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 148.88 Tm (|     - ScopedStandardsRetriever \(CodedTool\): reads ONE doc; isolation  |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 138.25 Tm (|     - GroundingChecker         \(CodedTool\): verifies the answer       |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 127.62 Tm (+-------------------------------+---------------------------------------+) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 117.00 Tm (                                |  API calls) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 106.38 Tm (+-------------------------------v---------------------------------------+) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 95.75 Tm (|                     Anthropic API  \(claude-sonnet\)                   |) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 85.12 Tm (+-----------------------------------------------------------------------+) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Length 4963 >>
+stream
+0.8 0.8 0.85 RG 0.6 w 54.00 742.00 m 558.00 742.00 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 718.00 Tm (Component Breakdown) Tj ET
+BT /F2 11.50 Tf 1 0 0 1 54.00 687.00 Tm (1. Frontend - frontend/run.py) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 672.00 Tm (A Streamlit chat interface that renders the conversation, calls the backend's) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 657.50 Tm (invoke_agent\(\), and persists both chat_context and sly_data in session state so) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 643.00 Tm (identity and current client are remembered across turns.) Tj ET
+BT /F2 11.50 Tf 1 0 0 1 54.00 617.50 Tm (2. Backend - backend/run.py) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 602.50 Tm (A thin module that bootstraps env vars \(AGENT_MANIFEST_FILE, AGENT_TOOL_PATH,) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 588.00 Tm (PYTHONPATH\), loads .env, and exposes invoke_agent\(agent_name, user_text, sly_data,) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 573.50 Tm (chat_context\) using neuro-san's in-process DirectAgentSessionFactory.) Tj ET
+BT /F2 11.50 Tf 1 0 0 1 54.00 548.00 Tm (3. Agent Registry - backend/registries/) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 524.00 Tm (File                       Purpose                                                      ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 512.95 Tm (----------------------------------------------------------------------------------------) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 502.33 Tm (manifest.hocon             Lists the active agent network                               ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 491.28 Tm (standards_concierge.hocon  Defines the 29 agents/tools and their instructions           ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 480.23 Tm (aaosa.hocon                AAOSA substitution variables \(aaosa_instructions, aaosa_call\)) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 469.18 Tm (llm_config.hocon           Shared LLM configuration \(Anthropic claude-sonnet\)           ) Tj ET
+BT /F2 11.50 Tf 1 0 0 1 54.00 441.12 Tm (4. Multi-Agent Network - standards_concierge.hocon) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 426.12 Tm (Three genuine routing levels \(client, team, topic\) plus four deterministic coded tools.) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 411.62 Tm (Team depth is uneven by design \(Banking A-D ... Telecom A\) so routing is dynamic.) Tj ET
+BT /F2 11.50 Tf 1 0 0 1 54.00 386.12 Tm (5. CodedTools - backend/coded_tools/standards_concierge/) Tj ET
+BT /F3 8.24 Tf 1 0 0 1 56.00 362.12 Tm (Tool                      Role                                                                        ) Tj ET
+BT /F3 8.24 Tf 1 0 0 1 56.00 351.42 Tm (------------------------------------------------------------------------------------------------------) Tj ET
+BT /F3 8.24 Tf 1 0 0 1 56.00 341.12 Tm (EmployeeDirectory         Maps a developer's name to the one client+team they may access              ) Tj ET
+BT /F3 8.24 Tf 1 0 0 1 56.00 330.42 Tm (ClientResolver            Resolves a repo/project to its client and remembers it in sly_data          ) Tj ET
+BT /F3 8.24 Tf 1 0 0 1 56.00 319.71 Tm (ScopedStandardsRetriever  Reads exactly one client/team/topic doc; enforces isolation + access in code) Tj ET
+BT /F3 8.24 Tf 1 0 0 1 56.00 309.01 Tm (GroundingChecker          Flags any answer claim not supported by the retrieved text                  ) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 287.30 m 558.00 287.30 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 263.30 Tm (Agentic System Highlights) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 238.30 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 238.30 Tm (Hierarchical AAOSA: three real routing levels; every delegating agent negotiates) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 223.80 Tm (the inquiry via aaosa_instructions / aaosa_call.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 209.30 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 209.30 Tm (sly_data session memory: current client and identity are carried out-of-band and) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 194.80 Tm (reused across turns - never re-typed into the prompt.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 180.30 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 180.30 Tm (Scoped-retrieval CodedTools: the retriever builds a path only from the requested) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 165.80 Tm (client and verifies it stays inside that client's folder - cross-client reads are) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 151.30 Tm (structurally impossible.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 136.80 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 136.80 Tm (Code-enforced access control: identity limits scope in Python, so the model cannot) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 122.30 Tm (be prompted into crossing a boundary.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 107.80 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 107.80 Tm (Grounding evaluation loop: every answer is checked against the source; if no rule) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 93.30 Tm (exists, the system escalates instead of inventing one.) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 73.80 m 558.00 73.80 l S
+endstream
+endobj
+6 0 obj
+<< /Length 2185 >>
+stream
+BT /F2 13.00 Tf 1 0 0 1 54.00 738.00 Tm (Data Flow) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 709.00 Tm (User: "Hi, I'm amirthap. Can I use a GPL library?") Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 698.38 Tm (  -> Frontend calls invoke_agent\('standards_concierge', text, sly_data, chat_context\)) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 687.75 Tm (  -> Backend creates a DirectAgentSession for 'standards_concierge') Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 677.12 Tm (  -> EmployeeDirectory: amirthap -> authorized Client_Banking / Team_A \(into sly_data\)) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 666.50 Tm (  -> Client_Router -> Client_Banking \(L2\) -> Banking_Team_A \(L3\)) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 655.88 Tm (  -> ScopedStandardsRetriever\(client=Banking, team=Team_A, topic=security\)) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 645.25 Tm (  -> GroundingChecker verifies the drafted answer against the doc) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 634.62 Tm (  -> Final response \(text + chat_context + sly_data\) returned to the frontend) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 613.00 m 558.00 613.00 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 589.00 Tm (Technology Stack) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 560.00 Tm (Layer            Technology                                                       ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 548.95 Tm (----------------------------------------------------------------------------------) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 538.33 Tm (Agent Framework  neuro-san 0.6.71                                                 ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 527.28 Tm (LLM              Anthropic claude-sonnet                                          ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 516.23 Tm (Frontend         Streamlit 1.56.0                                                 ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 505.18 Tm (Agent Config     HOCON                                                            ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 494.13 Tm (Custom Tools     Python 3 \(CodedTool interface\)                                   ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 483.08 Tm (Retrieval        Local Markdown files \(no vector DB - reliability for a live demo\)) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Pages /Count 3 /Kids [8 0 R 9 0 R 10 0 R] >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 7 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 4 0 R >>
+endobj
+9 0 obj
+<< /Type /Page /Parent 7 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 5 0 R >>
+endobj
+10 0 obj
+<< /Type /Page /Parent 7 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 6 0 R >>
+endobj
+11 0 obj
+<< /Type /Catalog /Pages 7 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000015 00000 n 
+0000000112 00000 n 
+0000000214 00000 n 
+0000000309 00000 n 
+0000006213 00000 n 
+0000011228 00000 n 
+0000013465 00000 n 
+0000013535 00000 n 
+0000013681 00000 n 
+0000013827 00000 n 
+0000013974 00000 n 
+trailer
+<< /Size 12 /Root 11 0 R >>
+startxref
+14024
+%%EOF

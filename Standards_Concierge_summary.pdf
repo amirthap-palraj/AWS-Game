@@ -1,0 +1,163 @@
+%PDF-1.4
+%ту╧╙
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Length 4373 >>
+stream
+BT /F2 17.00 Tf 1 0 0 1 54.00 728.00 Tm (Project Summary) Tj ET
+BT /F2 13.00 Tf 1 0 0 1 54.00 689.00 Tm (What We Built) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 664.00 Tm (A services company runs many client engagements, and each client has its own coding) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 649.50 Tm (standards, deploy approvals, security & licensing rules, and approved tools. Developers) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 635.00 Tm (who rotate between clients routinely mix up the rules - and the same question can have) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 620.50 Tm (opposite correct answers depending on the client. Guessing wrong ships a licensing,) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 606.00 Tm (security, or compliance violation.) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 586.50 Tm (We built the Multi-Client Standards Concierge: a conversational assistant where a) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 572.00 Tm (developer asks a plain-English question and gets the right standard for the client they) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 557.50 Tm (are on - routed automatically through client -> team -> topic - with an identity) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 543.00 Tm (layer that limits each developer to the client they are authorized for. All data is) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 528.50 Tm (synthetic.) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 509.00 m 558.00 509.00 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 485.00 Tm (The Problem) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 460.00 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 460.00 Tm (Same question, different right answer. "Can I use a GPL library?" is *prohibited*) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 445.50 Tm (for Banking but *allowed with architect sign-off* for Automotive.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 431.00 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 431.00 Tm (Rules bleed across clients. Yesterday's client's policy leaks into today's work.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 416.50 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 416.50 Tm (No single source of truth. Standards live in scattered docs no one re-reads.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 402.00 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 402.00 Tm (Access matters. A developer should not be able to read another client's standards.) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 382.50 m 558.00 382.50 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 358.50 Tm (How It Works) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 333.50 Tm (A Streamlit chat frontend talks to a neuro-san multi-agent backend.) Tj ET
+BT /F2 11.50 Tf 1 0 0 1 54.00 308.00 Tm (The Agentic System) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 288.00 Tm (The network has three genuine routing levels plus four deterministic coded tools:) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 268.50 Tm (Standards_Concierge \(front desk\) - receives every message, establishes the) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 254.00 Tm (developer's identity \(via EmployeeDirectory\) and current client \(via ClientResolver\),) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 239.50 Tm (enforces authorization, then routes the question.) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 220.00 Tm (Client_Router \(L1\) -> Client_<X> \(L2\) -> <X>_Team_<Y> \(L3\) - three real AAOSA routing) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 205.50 Tm (levels. Team depth is uneven on purpose \(Banking A-D, Automotive A-C, ... Telecom A\) so) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 191.00 Tm (routing is genuinely dynamic, not a uniform grid.) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 171.50 Tm (Coded tools - EmployeeDirectory \(identity -> authorized scope\), ClientResolver) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 157.00 Tm (\(repo -> client\), ScopedStandardsRetriever \(reads exactly one doc and enforces) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 142.50 Tm (isolation + access in code\), and GroundingChecker \(flags unsupported claims\).) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 123.00 Tm (The key architectural point: routing is by natural-language negotiation between agents) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 108.50 Tm (\(AAOSA\), while the guardrails are deterministic Python - isolation and access) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 94.00 Tm (control cannot be talked around, and when no rule exists the system escalates instead of) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 79.50 Tm (inventing one.) Tj ET
+BT /F2 11.50 Tf 1 0 0 1 54.00 54.00 Tm (Multi-Turn Conversations & Session Memory) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Length 5146 >>
+stream
+BT /F1 10.50 Tf 1 0 0 1 54.00 733.00 Tm (neuro-san's chat_context threads conversation state across turns, and sly_data) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 718.50 Tm (carries the developer's identity and current client out-of-band. The frontend persists) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 704.00 Tm (both in Streamlit session state, so once you say "I'm amirthap" you never have to repeat) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 689.50 Tm (it - and cross-client questions stay blocked.) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 670.00 m 558.00 670.00 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 646.00 Tm (Technology Choices) Tj ET
+BT /F3 6.67 Tf 1 0 0 1 56.00 617.00 Tm (Concern              Choice                   Reason                                                                          ) Tj ET
+BT /F3 6.67 Tf 1 0 0 1 56.00 608.33 Tm (------------------------------------------------------------------------------------------------------------------------------) Tj ET
+BT /F3 6.67 Tf 1 0 0 1 56.00 600.00 Tm (Agent orchestration  neuro-san 0.6.71         Declarative HOCON agents; AAOSA routing; CodedTool interface; multi-turn context) Tj ET
+BT /F3 6.67 Tf 1 0 0 1 56.00 591.33 Tm (LLM                  Anthropic claude-sonnet  Strong instruction-following for routing and grounded answers                   ) Tj ET
+BT /F3 6.67 Tf 1 0 0 1 56.00 582.67 Tm (Frontend             Streamlit 1.56.0         Rapid chat UI; session state for context + sly_data                             ) Tj ET
+BT /F3 6.67 Tf 1 0 0 1 56.00 574.00 Tm (Retrieval            Local Markdown files     Reliability over sophistication for a live demo \(no vector DB\)                  ) Tj ET
+BT /F3 6.67 Tf 1 0 0 1 56.00 565.33 Tm (Agent config         HOCON                    Comments + includes; readable hierarchical multi-agent topologies               ) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 545.67 m 558.00 545.67 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 521.67 Tm (Project Structure) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 492.67 Tm (Multi-Client-Standards-Concierge/) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 482.04 Tm (|-- backend/) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 471.42 Tm (|   |-- run.py                          # Backend entry point & invoke_agent\(\)) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 460.79 Tm (|   |-- registries/                     # manifest, network, aaosa, llm_config) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 450.17 Tm (|   \\-- coded_tools/standards_concierge/  # 4 coded tools + 64 synthetic docs) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 439.54 Tm (|-- frontend/) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 428.92 Tm (|   \\-- run.py                          # Streamlit chat interface) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 418.29 Tm (|-- requirements.txt) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 407.67 Tm (|-- architecture.md) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 397.04 Tm (|-- summary.md) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 386.42 Tm (\\-- README.md) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 364.79 m 558.00 364.79 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 340.79 Tm (What Makes This Interesting for a Hackathon) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 315.79 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 315.79 Tm (Three genuine routing levels, not a flattened lookup - client, team, and topic are) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 301.29 Tm (each decided by an agent.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 286.79 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 286.79 Tm (Same question, opposite answers across clients - a vivid, one-glance demo.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 272.29 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 272.29 Tm (Deterministic guardrails: isolation and access control are enforced in code, so the) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 257.79 Tm (behaviour is reliable, not prompt-dependent.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 243.29 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 243.29 Tm (Grounded answers: an evaluation loop flags hallucinations; missing rules escalate) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 228.79 Tm (instead of being invented.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 214.29 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 214.29 Tm (Identity-aware: a developer only ever sees the client they are authorized for.) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 194.79 m 558.00 194.79 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 170.79 Tm (Example Interaction) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 141.79 Tm (User:   Hi, I'm amirthap. Can I use a GPL-licensed library?) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 131.17 Tm (Agent:  Hi amirthap - you're on Client_Banking \(Team_A\). No: GPL/AGPL/LGPL) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 120.54 Tm (        dependencies are prohibited in any Banking service. Consider a) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 109.92 Tm (        permissively-licensed alternative, or escalate to the architect.) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 99.29 Tm () Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 88.67 Tm (User:   Show me the Automotive client's security standards.) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 78.04 Tm (Agent:  You're authorized for Client_Banking only, not Automotive - I can't) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 67.42 Tm (        show you another client's standards.) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Length 772 >>
+stream
+0.8 0.8 0.85 RG 0.6 w 54.00 733.00 m 558.00 733.00 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 709.00 Tm (Future Work) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 684.00 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 684.00 Tm (Swap synthetic Markdown for a governed standards repository per client.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 669.50 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 669.50 Tm (Add an audit log of who asked what, for which client.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 655.00 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 655.00 Tm (Optional richer retrieval \(hybrid search\) once reliability is proven.) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 640.50 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 640.50 Tm (Role tiers \(e.g., architects can read all teams within their client\).) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Pages /Count 3 /Kids [8 0 R 9 0 R 10 0 R] >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 7 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 4 0 R >>
+endobj
+9 0 obj
+<< /Type /Page /Parent 7 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 5 0 R >>
+endobj
+10 0 obj
+<< /Type /Page /Parent 7 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 6 0 R >>
+endobj
+11 0 obj
+<< /Type /Catalog /Pages 7 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000015 00000 n 
+0000000112 00000 n 
+0000000214 00000 n 
+0000000309 00000 n 
+0000004734 00000 n 
+0000009932 00000 n 
+0000010755 00000 n 
+0000010825 00000 n 
+0000010971 00000 n 
+0000011117 00000 n 
+0000011264 00000 n 
+trailer
+<< /Size 12 /Root 11 0 R >>
+startxref
+11314
+%%EOF

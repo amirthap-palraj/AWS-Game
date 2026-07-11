@@ -1,0 +1,166 @@
+%PDF-1.4
+%ту╧╙
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Length 3286 >>
+stream
+BT /F2 17.00 Tf 1 0 0 1 54.00 728.00 Tm (Multi-Client Standards Concierge) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 698.00 Tm (An AI assistant that answers a developer's plain-English question about engineering) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 683.50 Tm (standards and routes it to the correct client -> team -> topic, answering with) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 669.00 Tm (*that client's* rules only. Built with Cognizant's) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 654.50 Tm (neuro-san multi-agent framework.) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 635.00 Tm (A services company runs many client engagements, each with its own coding standards,) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 620.50 Tm (deploy approvals, security & licensing rules, and approved tools. Developers rotate) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 606.00 Tm (between clients and mix up the rules. Ask *"Can I use a GPL library?"* and the) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 591.50 Tm (concierge figures out which client you're on, which team owns your repo, and which) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 577.00 Tm (topic your question falls under - then answers for that client. An identity layer) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 562.50 Tm (limits each developer to the client they are authorized for.) Tj ET
+BT /F1 10.00 Tf 1 0 0 1 68.00 543.00 Tm (All data is synthetic. No real, proprietary, or personally identifiable data is used.) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 524.00 m 558.00 524.00 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 500.00 Tm (Prerequisites) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 475.00 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 475.00 Tm (Python 3.13) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 460.50 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 460.50 Tm (An Anthropic API key \(the agents use Claude claude-sonnet\)) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 441.00 m 558.00 441.00 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 417.00 Tm (Setup) Tj ET
+BT /F2 11.50 Tf 1 0 0 1 54.00 386.00 Tm (1. Clone the repository) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 362.00 Tm (git clone <repo-url>) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 351.38 Tm (cd Multi-Client-Standards-Concierge) Tj ET
+BT /F2 11.50 Tf 1 0 0 1 54.00 323.75 Tm (2. Create and activate a virtual environment) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 299.75 Tm (python -m venv .venv) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 289.12 Tm (source .venv/bin/activate        # macOS / Linux) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 278.50 Tm (# .venv\\Scripts\\activate          # Windows) Tj ET
+BT /F2 11.50 Tf 1 0 0 1 54.00 250.88 Tm (3. Install dependencies) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 226.88 Tm (pip install -r requirements.txt) Tj ET
+BT /F2 11.50 Tf 1 0 0 1 54.00 199.25 Tm (4. Set your Anthropic API key) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 179.25 Tm (Create a .env file in the project root \(the backend loads it automatically via python-dotenv\):) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 155.75 Tm (echo "ANTHROPIC_API_KEY=sk-ant-..." > .env) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 134.12 m 558.00 134.12 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 110.12 Tm (Running the App) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 85.12 Tm (Run every command from the project root \(the folder that contains backend/ and) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 70.62 Tm (frontend/\) so the HOCON include paths resolve.) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Length 5003 >>
+stream
+BT /F2 11.50 Tf 1 0 0 1 54.00 732.00 Tm (Launch the Streamlit web interface) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 708.00 Tm (streamlit run frontend/run.py) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 686.38 Tm (Open the URL printed in the terminal \(usually http://localhost:8501\) and chat.) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 666.88 Tm (Example prompts \(run them in order in one session\):) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 647.38 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 647.38 Tm (Hi, I'm amirthap. Can I use a GPL library? -> Banking: prohibited) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 632.88 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 632.88 Tm (How many approvers do I need to deploy to production for Team_B? -> remembered client, no) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 618.38 Tm (re-typing) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 603.88 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 603.88 Tm (Show me the Automotive client's security standards -> not authorized) Tj ET
+BT /F1 10.5 Tf 1 0 0 1 62.00 589.38 Tm (Х) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 74.00 589.38 Tm (Can I use Chrome? -> not on the approved list -> escalate to the architect) Tj ET
+BT /F2 11.50 Tf 1 0 0 1 54.00 563.88 Tm (Run the backend directly \(headless / scripting\)) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 539.88 Tm (python backend/run.py) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 518.25 Tm (This invokes the concierge with a built-in test prompt and prints the response.) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 498.75 m 558.00 498.75 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 474.75 Tm (Project Structure) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 445.75 Tm (Multi-Client-Standards-Concierge/) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 435.12 Tm (|-- backend/) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 424.50 Tm (|   |-- run.py                          # Backend entry point; exposes invoke_agent\(\)) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 413.88 Tm (|   |-- registries/) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 403.25 Tm (|   |   |-- manifest.hocon              # Active agent registry) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 392.62 Tm (|   |   |-- standards_concierge.hocon   # The three-level agent network) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 382.00 Tm (|   |   |-- aaosa.hocon                 # AAOSA substitution variables) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 371.38 Tm (|   |   \\-- llm_config.hocon            # Shared LLM configuration \(Anthropic claude-sonnet\)) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 360.75 Tm (|   \\-- coded_tools/) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 350.12 Tm (|       \\-- standards_concierge/) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 339.50 Tm (|           |-- employee_directory.py       # Identity / access-control layer) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 328.88 Tm (|           |-- client_resolver.py          # Repo/project -> client \(sly_data\)) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 318.25 Tm (|           |-- scoped_standards_retriever.py  # Reads ONE doc; enforces isolation + access) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 307.62 Tm (|           |-- grounding_checker.py        # Flags claims not supported by the source) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 297.00 Tm (|           |-- constants.py                # Clients / teams / topics) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 286.38 Tm (|           \\-- data/                       # 64 synthetic standards docs + lookup tables) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 275.75 Tm (|-- frontend/) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 265.12 Tm (|   \\-- run.py                          # Streamlit chat UI \(threads chat_context + sly_data\)) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 254.50 Tm (|-- requirements.txt) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 243.88 Tm (|-- architecture.md) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 233.25 Tm (|-- summary.md) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 58.00 222.62 Tm (\\-- README.md) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 201.00 m 558.00 201.00 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 177.00 Tm (How It Works) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 152.00 Tm (A three-level hierarchical AAOSA network plus an identity layer:) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 128.50 Tm (Agent / Tool              Role                                                               ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 117.45 Tm (---------------------------------------------------------------------------------------------) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 106.83 Tm (Standards_Concierge       Front desk - talks to the developer; establishes identity & client ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 95.78 Tm (Client_Router \(L1\)        Routes to the correct client engagement                            ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 84.73 Tm (Client_<X> \(L2\)           Per-client team router \(team depth varies per client\)              ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 73.68 Tm (<X>_Team_<Y> \(L3\)         Topic specialist - picks coding/security/deploy/tools and retrieves) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 62.63 Tm (EmployeeDirectory         CodedTool - identity -> authorized client + team                   ) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Length 2209 >>
+stream
+BT /F3 8.50 Tf 1 0 0 1 56.00 738.00 Tm (ClientResolver            CodedTool - repo/project -> client, remembered in sly_data         ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 726.95 Tm (ScopedStandardsRetriever  CodedTool - reads exactly one doc; blocks cross-client access      ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 715.90 Tm (GroundingChecker          CodedTool - verifies every claim against the retrieved text        ) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 693.85 Tm (See architecture.md and summary.md for details.) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 674.35 m 558.00 674.35 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 650.35 Tm (Dependencies) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 621.35 Tm (Package                 Version       Purpose                            ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 610.30 Tm (-------------------------------------------------------------------------) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 599.68 Tm (neuro-san               0.6.71        Multi-agent orchestration framework) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 588.63 Tm (streamlit               1.56.0        Web chat interface                 ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 577.58 Tm (python-dotenv           1.0.1         .env file support                  ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 566.53 Tm (aiofiles                >=24.1.0      Async file I/O                     ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 555.48 Tm (langchain-mcp-adapters  >=0.1.7,<1.0  MCP tool adapters for LangChain    ) Tj ET
+BT /F3 8.50 Tf 1 0 0 1 56.00 544.43 Tm (langchain-anthropic     >=1.0.0,<2.0  LangChain Anthropic integration    ) Tj ET
+0.8 0.8 0.85 RG 0.6 w 54.00 522.38 m 558.00 522.38 l S
+BT /F2 13.00 Tf 1 0 0 1 54.00 498.38 Tm (Troubleshooting) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 473.38 Tm (ANTHROPIC_API_KEY not found - Ensure your .env file is in the project root, or export the variable before) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 458.88 Tm (running.) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 439.38 Tm (HOCON include / file-not-found - Run from the project root so include "backend/registries/..." paths resolve.) Tj ET
+BT /F1 10.50 Tf 1 0 0 1 54.00 419.88 Tm (Port already in use - streamlit run frontend/run.py --server.port 8502) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Pages /Count 3 /Kids [8 0 R 9 0 R 10 0 R] >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 7 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 4 0 R >>
+endobj
+9 0 obj
+<< /Type /Page /Parent 7 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 5 0 R >>
+endobj
+10 0 obj
+<< /Type /Page /Parent 7 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 6 0 R >>
+endobj
+11 0 obj
+<< /Type /Catalog /Pages 7 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000015 00000 n 
+0000000112 00000 n 
+0000000214 00000 n 
+0000000309 00000 n 
+0000003647 00000 n 
+0000008702 00000 n 
+0000010963 00000 n 
+0000011033 00000 n 
+0000011179 00000 n 
+0000011325 00000 n 
+0000011472 00000 n 
+trailer
+<< /Size 12 /Root 11 0 R >>
+startxref
+11522
+%%EOF
